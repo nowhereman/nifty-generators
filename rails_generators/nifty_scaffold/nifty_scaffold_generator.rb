@@ -84,7 +84,9 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         
         if rspec?
           m.directory "spec/controllers"
-          m.template "tests/#{test_framework}/controller.rb", "spec/controllers/#{plural_name}_controller_spec.rb"
+          rspec_controller_template = rspec_mocha_mocks? ? "controller_mocha_mocks.rb" : "controller_rspec_mocks.rb"
+          m.template "tests/#{test_framework}/#{rspec_controller_template}",
+                    "spec/controllers/#{plural_name}_controller_spec.rb"
         else
           m.directory "test/functional"
           m.template "tests/#{test_framework}/controller.rb", "test/functional/#{plural_name}_controller_test.rb"
@@ -185,6 +187,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     test_framework == :rspec
   end
   
+  def rspec_mocha_mocks?
+    rspec_mock_with == :mocha
+  end
+  
 protected
   
   def view_language
@@ -193,6 +199,10 @@ protected
   
   def test_framework
     options[:test_framework] ||= default_test_framework
+  end
+  
+  def rspec_mock_with
+    options[:rspec_mock_with] ||= :mocha
   end
   
   def default_test_framework
@@ -210,6 +220,7 @@ protected
     opt.on("--haml", "Generate HAML views instead of ERB.") { |v| options[:haml] = v }
     opt.on("--testunit", "Use test/unit for test files.") { options[:test_framework] = :testunit }
     opt.on("--rspec", "Use RSpec for test files.") { options[:test_framework] = :rspec }
+    opt.on("--rspecmocks", "Use RSpec for test files.") { options[:rspec_mock_with] = :rspec }
     opt.on("--shoulda", "Use Shoulda for test files.") { options[:test_framework] = :shoulda }
   end
   
@@ -219,7 +230,9 @@ protected
   end
   
   def read_template(relative_path)
-    ERB.new(File.read(source_path(relative_path)), nil, '-').result(binding)
+    File.exist?(source_path(relative_path)) ?
+      ERB.new(File.read(source_path(relative_path)), nil, '-').result(binding) :
+      ""
   end
   
   def banner
