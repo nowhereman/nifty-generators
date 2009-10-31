@@ -23,7 +23,9 @@
     </tr>
   <%% end %>
 </table>
-
+<%- if options[:will_paginate] -%>
+<p><%%= will_paginate @<%= plural_name %> %></p>
+<%- end -%>
 <%- if action? :new -%>
 <p><%%= link_to "New <%= singular_name.titleize %>", new_<%= singular_name %>_path %></p>
 <%- end -%>

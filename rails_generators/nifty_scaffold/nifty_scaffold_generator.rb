@@ -64,7 +64,11 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       
       unless options[:skip_controller]
         m.directory "app/controllers"
-        m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
+        if options[:inherited_resources]
+  	      m.template "inherited_resources_controller.rb", "app/controllers/#{plural_name}_controller.rb"
+	      else
+	        m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
+  	    end
         
         m.directory "app/helpers"
         m.template "helper.rb", "app/helpers/#{plural_name}_helper.rb"
@@ -77,7 +81,11 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         end
       
         if form_partial?
-          m.template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
+        	if options[:formtastic]
+          	m.template "views/#{view_language}/_formtastic.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
+          else
+          	m.template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{plural_name}/_form.html.#{view_language}"
+          end
         end
       
         m.route_resources plural_name
@@ -208,6 +216,9 @@ protected
     opt.on("--skip-controller", "Don't generate controller, helper, or views.") { |v| options[:skip_controller] = v }
     opt.on("--invert", "Generate all controller actions except these mentioned.") { |v| options[:invert] = v }
     opt.on("--haml", "Generate HAML views instead of ERB.") { |v| options[:haml] = v }
+    opt.on("--inherited-resources", "Generate inherited-resources controller instead of conventional.") { |v| options[:inherited_resources] = v }
+    opt.on("--will-paginate", "Generate will-paginate code.") { |v| options[:will_paginate] = v }
+    opt.on("--formtastic", "Generate formtastic forms.") { |v| options[:formtastic] = v }
     opt.on("--testunit", "Use test/unit for test files.") { options[:test_framework] = :testunit }
     opt.on("--rspec", "Use RSpec for test files.") { options[:test_framework] = :rspec }
     opt.on("--shoulda", "Use Shoulda for test files.") { options[:test_framework] = :shoulda }
