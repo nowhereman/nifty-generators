@@ -302,6 +302,16 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
       end
     end
     
+    context "generator with --make-fixture" do
+      rails_generator :nifty_scaffold, "line_item", "name:string", :make_fixture => true
+      
+      should "have fixture with attributes" do
+        assert_generated_file "test/fixtures/line_items.yml" do |body|
+          assert_match "name: MyString", body
+        end
+      end
+    end
+      
     context "existing model" do
       setup do
         Dir.mkdir("#{RAILS_ROOT}/app") unless File.exists?("#{RAILS_ROOT}/app")
@@ -371,11 +381,8 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
           end
         end
         
-        should "have fixture with attributes" do
-          assert_generated_file "spec/fixtures/line_items.yml" do |body|
-            assert_match "name: MyString", body
-            assert_match "description: MyText", body
-          end
+        should "generate fixture file" do
+          assert Dir.glob("#{RAILS_ROOT}/test/fixtures/*.yml").empty?
         end
       end
       
@@ -444,11 +451,8 @@ class TestNiftyScaffoldGenerator < Test::Unit::TestCase
           end
         end
         
-        should "have fixture with attributes" do
-          assert_generated_file "test/fixtures/line_items.yml" do |body|
-            assert_match "name: MyString", body
-            assert_match "description: MyText", body
-          end
+        should "generate fixture file" do
+          assert Dir.glob("#{RAILS_ROOT}/test/fixtures/*.yml").empty?
         end
       end
       
