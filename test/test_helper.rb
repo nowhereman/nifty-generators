@@ -44,7 +44,7 @@ module NiftyGenerators
     end
   
     def generator_sources
-      [RubiGen::PathSource.new(:test, File.join(File.dirname(__FILE__), "..", "rails_generators"))]
+      [RubiGen::PathSource.new(:test, File.join(File.dirname(__FILE__), "..", "generators"))]
     end
   end
   
