@@ -35,6 +35,7 @@ class NiftyLayoutGenerator < Rails::Generator::Base
     def add_options!(opt)
       opt.separator ''
       opt.separator 'Options:'
+      opt.on("--authlogic", "Use Authlogic for authentication.") { |v| options[:authlogic] = v }
       opt.on("--haml", "Generate HAML for view, and SASS for stylesheet.") { |v| options[:haml] = v }
       opt.on("--jammit", "Use Jammit, an industrial strength asset packaging.") { |v| options[:jammit] = v }
       opt.on("--jquery", "Use jQuery unobtrusive goodness.") { |v| options[:jquery] = v }
