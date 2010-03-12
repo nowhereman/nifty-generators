@@ -4,6 +4,9 @@
   <head>
     <title><%%= h(yield(:title) || "Untitled") %></title>
     <%%= stylesheet_link_tag '<%= file_name %>' %>
+    <%- if options[:formtastic] -%>
+    <%%= stylesheet_link_tag 'formtastic', 'formtastic_changes' %>
+    <%- end -%>
     <%- if options[:jammit] -%>
     <%%= raw include_stylesheets(:common, :media => 'all') %>
     <%%= raw include_javascripts :workspace %>

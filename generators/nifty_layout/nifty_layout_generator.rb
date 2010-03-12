@@ -3,13 +3,13 @@ class NiftyLayoutGenerator < Rails::Generator::Base
     super
     @name = @args.first || 'application'
   end
-  
+
   def manifest
     record do |m|
       m.directory 'app/views/layouts'
       m.directory 'public/stylesheets'
       m.directory 'app/helpers'
-      
+
       if options[:haml]
         m.directory 'public/stylesheets/sass'
         m.template "layout.html.haml", "app/views/layouts/#{file_name}.html.haml"
@@ -25,7 +25,7 @@ class NiftyLayoutGenerator < Rails::Generator::Base
       m.file "helper.rb", "app/helpers/layout_helper.rb"
     end
   end
-  
+
   def file_name
     @name.underscore
   end
@@ -36,6 +36,7 @@ class NiftyLayoutGenerator < Rails::Generator::Base
       opt.separator ''
       opt.separator 'Options:'
       opt.on("--authlogic", "Use Authlogic for authentication.") { |v| options[:authlogic] = v }
+      opt.on("--formtastic", "Include Formtastic stylesheet.") { |v| options[:formtastic] = v }
       opt.on("--haml", "Generate HAML for view, and SASS for stylesheet.") { |v| options[:haml] = v }
       opt.on("--jammit", "Use Jammit, an industrial strength asset packaging.") { |v| options[:jammit] = v }
       opt.on("--jquery", "Use jQuery unobtrusive goodness.") { |v| options[:jquery] = v }
