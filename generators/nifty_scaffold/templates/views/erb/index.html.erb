@@ -11,7 +11,7 @@
   <%% end %>
 </table>
 <%- if options[:will_paginate] -%>
-<p><%%= will_paginate @<%= plural_name %> %></p>
+<%%= <%= singular_name %>_pagination @<%= plural_name %> %>
 <%- end -%>
 <%- if action? :new -%>
 <p><%%= link_to t('<%= singular_name %>.actions.new'), new_<%= singular_name %>_path<%= ", :id => 'get_new_#{singular_name}', :class => 'remote-get'" if options[:jquery] %>%></p>
