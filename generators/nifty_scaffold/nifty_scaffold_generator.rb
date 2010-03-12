@@ -96,6 +96,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
           end
           m.template "views/#{view_language}/delete.html.#{view_language}", "app/views/#{plural_name}/delete.html.#{view_language}" if action == 'destroy'
           if File.exist? source_path("views/#{view_language}/#{action}.html.#{view_language}")
+            m.template "views/#{view_language}/_model.html.#{view_language}", "app/views/#{plural_name}/_#{singular_name}.html.#{view_language}" if action == 'index'
             m.template "views/#{view_language}/#{action}.html.#{view_language}", "app/views/#{plural_name}/#{action}.html.#{view_language}"
           end
         end
@@ -114,7 +115,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
           m.directory "spec/controllers"
           rspec_controller_template = rspec_mocha_mocks? ? "controller_mocha_mocks.rb" : "controller_rspec_mocks.rb"
           m.template "tests/#{test_framework}/#{rspec_controller_template}",
-                    "spec/controllers/#{plural_name}_controller_spec.rb"
+            "spec/controllers/#{plural_name}_controller_spec.rb"
         else
           m.directory "test/functional"
           m.template "tests/#{test_framework}/controller.rb", "test/functional/#{plural_name}_controller_test.rb"
@@ -255,11 +256,11 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     options[:test_framework] ||= default_test_framework
   end
 
- 
+
   def rspec_mock_with
     options[:rspec_mock_with] ||= :mocha
   end
-  
+
   def default_test_framework
     File.exist?(destination_path("spec")) ? :rspec : :testunit
   end
