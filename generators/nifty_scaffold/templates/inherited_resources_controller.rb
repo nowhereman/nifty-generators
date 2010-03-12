@@ -1,7 +1,12 @@
 class <%= plural_class_name %>Controller < InheritedResources::Base
   actions :<%= controller_actions.join(', :') %>
   respond_to :html, :xml, :json<%= ", :js" if options[:jquery] %>
+ 
+  <%- if options[:declarative_authorization] -%>
+  # Uncomment to enable authorization rules
+#   filter_resource_access
   
+  <%- end -%>
   <%- if controller_actions.include?('destroy') -%>
   def delete
     @<%= singular_name %> = <%= class_name %>.find(params[:id])

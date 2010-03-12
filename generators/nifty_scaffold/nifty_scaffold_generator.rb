@@ -274,6 +274,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     opt.on("--skip-controller", "Don't generate controller, helper, or views.") { |v| options[:skip_controller] = v }
     opt.on("--make-fixture", "Only generate fixture file for model if requested.") { |v| options[:make_fixture] = v }
     opt.on("--invert", "Generate all controller actions except these mentioned.") { |v| options[:invert] = v }
+    opt.on("--declarative_authorization", "Use Declarative Authorization for authorization.") { |v| options[:declarative_authorization] = v }
     opt.on("--jquery", "Use jQuery unobtrusive goodness.") { |v| options[:jquery] = v }
     opt.on("--multilanguage", "Generate multilanguage files") { |v| options[:multilanguage] = v }
     opt.on("--haml", "Generate HAML views instead of ERB.") { |v| options[:haml] = v }
