@@ -1,6 +1,7 @@
 class <%= plural_class_name %>Controller < InheritedResources::Base
   actions :<%= controller_actions.join(', :') %>
 	<%- if options[:will_paginate] -%>
+  respond_to :html, :xml, :json<%= ", :js" if options[:jquery] %>
   
 	protected
   def collection

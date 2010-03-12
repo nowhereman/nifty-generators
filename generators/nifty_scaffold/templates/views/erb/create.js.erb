@@ -1,0 +1,13 @@
+<%% unless flash.blank? %>
+  <%%= raw show_flash_message %>
+  <%% if flash[:notice] %>
+    $("#<%= plural_name %>").append($("<%%= escape_javascript render('<%= singular_name %>') %>"));
+    
+    $("div#new_<%= singular_name %> > form")[0].reset();
+    window.location.hash = "#";
+  <%% end %>
+<%% else %>
+  <%%= flash[:alert] = I18n.t("flash.<%= plural_name %>.#{params[:action]}.alert") %>
+  <%%= raw show_flash_message %>
+<%% end %>
+<%% flash.discard %>

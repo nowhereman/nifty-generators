@@ -1,0 +1,17 @@
+<%% unless flash.blank? %>
+  <%%= raw show_flash_message %>
+  <%% if flash[:notice] %>
+    $("#<%= plural_name %> #show_<%= singular_name %>_<%%= @<%= singular_name %>.id %>").replaceWith($("<%%= escape_javascript render('<%= singular_name %>') %>"));
+    var new_div = $("<div id='new_<%= singular_name %>'></div>");
+    $("div#edit_<%= singular_name %>_<%%= @<%= singular_name %>.id %>").replaceWith(new_div);
+    <%% @<%= singular_name %> = <%= class_name %>.new %>
+    new_div.append($("<a name='new_<%= singular_name %>'></a>"))
+      .append($("<h2><%%=  t('<%= singular_name %>.new.title').titleize %></h2>"))
+      .append($("<%%= escape_javascript render("form", :remote_class => "remote-post") %>"));
+    window.location.hash = "#";
+  <%% end %>
+<%% else %>
+  <%%= flash[:alert] = I18n.t("flash.<%= plural_name %>.#{params[:action]}.alert") %>
+  <%%= raw show_flash_message %>
+<%% end %>
+<%% flash.discard %>

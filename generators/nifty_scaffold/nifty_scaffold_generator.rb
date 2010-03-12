@@ -90,6 +90,9 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
 
         m.directory "app/views/#{plural_name}"
         controller_actions.each do |action|
+          if options[:jquery] && [:new, :create, :edit, :update, :destroy].include?(action.to_sym)
+            m.template "views/#{view_language}/#{action}.js.#{view_language}", "app/views/#{plural_name}/#{action}.js.#{view_language}"
+          end
           if File.exist? source_path("views/#{view_language}/#{action}.html.#{view_language}")
             m.template "views/#{view_language}/#{action}.html.#{view_language}", "app/views/#{plural_name}/#{action}.html.#{view_language}"
           end
@@ -265,6 +268,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     opt.on("--skip-controller", "Don't generate controller, helper, or views.") { |v| options[:skip_controller] = v }
     opt.on("--make-fixture", "Only generate fixture file for model if requested.") { |v| options[:make_fixture] = v }
     opt.on("--invert", "Generate all controller actions except these mentioned.") { |v| options[:invert] = v }
+    opt.on("--jquery", "Use jQuery unobtrusive goodness.") { |v| options[:jquery] = v }
     opt.on("--multilanguage", "Generate multilanguage files") { |v| options[:multilanguage] = v }
     opt.on("--haml", "Generate HAML views instead of ERB.") { |v| options[:haml] = v }
     opt.on("--inherited-resources", "Generate inherited-resources controller instead of conventional.") { |v| options[:inherited_resources] = v }

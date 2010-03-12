@@ -1,0 +1,17 @@
+<%% unless flash.blank? %>
+  <%%= raw show_flash_message %>
+  <%% if flash[:notice] %>
+    $("#<%= plural_name %> #show_<%= singular_name %>_<%%= @<%= singular_name %>.id %>").remove();
+    var old_div = $("div#edit_<%= singular_name %>_<%%= @<%= singular_name %>.id %>");
+    if(old_div.length > 0) {
+      old_div.remove();
+      $("a#get_new_<%= singular_name %>").show();
+    }
+      
+    window.location.hash = "#";
+  <%% end %>
+<%% else %>
+  <%%= flash[:alert] = I18n.t("flash.<%= plural_name %>.#{params[:action]}.alert") %>
+  <%%= raw show_flash_message %>
+<%% end %>
+<%% flash.discard %>

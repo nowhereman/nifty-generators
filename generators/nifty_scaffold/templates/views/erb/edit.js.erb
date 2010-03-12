@@ -1,0 +1,14 @@
+$("div.flash").remove();
+
+var old_div = $("div#new_<%= singular_name %>, div[id^=edit_<%= singular_name %>]");
+var new_div = $("<div id='edit_<%= singular_name %>_<%%= params[:id] %>'></div>");
+if(old_div.length == 0) {
+  $("a#get_new_<%= singular_name %>").after(new_div).hide();
+} else {
+  old_div.replaceWith(new_div);
+}
+new_div.append($("<a name='edit_<%= singular_name %>'></a>"))
+  .append($("<h2><%%=  t('<%= singular_name %>.edit.title').titleize %></h2>"))
+  .append($("<%%= escape_javascript render("form", :remote_class => "remote-put") %>"));
+window.location.hash = "#edit_<%= singular_name %>";
+$("div#edit_<%= singular_name %>_<%%= params[:id] %> > form").find("input:visible, select:visible").get(0).focus();
