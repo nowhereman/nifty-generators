@@ -42,6 +42,17 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
 
   def manifest
     record do |m|
+      m.directory "config/locales/templates"
+      locales = (options[:multilanguage]) ? all_locales : [ I18n.default_locale ]
+
+      locales.each do |locale|
+        unless File.exist? destination_path("config/locales/#{locale}.yml")
+          FileUtils.cp(source_path("locales/#{locale}.yml"), destination_path("config/locales/#{locale}.yml"))
+        end
+
+        m.template "locales/template.#{locale}.yml", "config/locales/templates/#{singular_name}.#{locale}.yml"
+      end
+
       unless options[:skip_model]
         m.directory "app/models"
         m.template "model.rb", "app/models/#{singular_name}.rb"
@@ -113,6 +124,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
 
   def all_actions
     %w[index show new create edit update destroy]
+  end
+
+  def all_locales
+    Dir["#{source_path('locales')}/*.{yml,yaml}"].reject { |f| !f.match(/^.+\/[^\.]+\.(yml|yaml)$/) }.map! { |l| l.gsub(/^.+\/(.+)\.(yml|yaml)$/,'\1') }
   end
 
   def action?(name)
@@ -203,8 +218,26 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   def rspec_mocha_mocks?
     rspec_mock_with == :mocha
   end
-  
-protected
+
+  def after_generate
+    m = Rails::Generator::Commands::Create.new(self)
+    locales = (options[:multilanguage]) ? all_locales : [ I18n.default_locale ]
+
+    locales.each do |locale|
+      m.template "locales/#{locale}.yml", "config/locales/templates/#{locale}.yml"
+      files = Dir["#{source_path('locales')}/*.#{locale}.yml"] - [source_path("locales/template.#{locale}.yml")]
+      files.each do |file|
+        file = file.gsub("\\","/")# Windows fix
+        file_name = File.basename(file)
+        m.template "locales/#{file_name}", "config/locales/templates/#{file_name}"
+      end
+    end
+
+    m.file('tasks/locale.rake', 'lib/tasks/locale.rake')
+   `rake locales:update`
+  end
+
+  protected
 
   def view_language
     options[:haml] ? 'haml' : 'erb'
@@ -232,6 +265,7 @@ protected
     opt.on("--skip-controller", "Don't generate controller, helper, or views.") { |v| options[:skip_controller] = v }
     opt.on("--make-fixture", "Only generate fixture file for model if requested.") { |v| options[:make_fixture] = v }
     opt.on("--invert", "Generate all controller actions except these mentioned.") { |v| options[:invert] = v }
+    opt.on("--multilanguage", "Generate multilanguage files") { |v| options[:multilanguage] = v }
     opt.on("--haml", "Generate HAML views instead of ERB.") { |v| options[:haml] = v }
     opt.on("--inherited-resources", "Generate inherited-resources controller instead of conventional.") { |v| options[:inherited_resources] = v }
     opt.on("--will-paginate", "Generate will-paginate code.") { |v| options[:will_paginate] = v }

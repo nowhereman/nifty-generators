@@ -1,0 +1,14 @@
+ <tr id="show_<%= singular_name %>_<%%= <%= singular_name %>.id %>" class="<%= singular_name %>">
+  <%- for attribute in attributes -%>
+    <td><%%=h <%= singular_name %>.<%= attribute.name %> %></td>
+  <%- end -%>
+  <%- if action? :show -%>
+    <td><%%= link_to t('common.actions.show'), <%= singular_name %> %></td>
+  <%- end -%>
+  <%- if action? :edit -%>
+    <td><%%= link_to t('common.actions.edit'), edit_<%= singular_name %>_path(<%= singular_name %>)<%=  ", :class => 'remote-get'" if options[:jquery] %> %></td>
+  <%- end -%>
+  <%- if action? :destroy -%>
+    <td><%%= link_to t('common.actions.destroy'), delete_<%= singular_name %>_path(<%= singular_name %>)<%=  ", :class => 'remote-delete', :'data-confirm' => t('common.labels.are_you_sure')" if options[:jquery] %> %></td>
+  <%- end -%>
+</tr>

@@ -1,31 +1,18 @@
-<%% title "<%= plural_name.titleize %>" %>
+<%% title t('<%= singular_name %>.index.title') %>
 
-<table>
+<table id="<%= plural_name %>">
   <tr>
   <%- for attribute in attributes -%>
     <th><%= attribute.column.human_name.titleize %></th>
   <%- end -%>
   </tr>
   <%% for <%= singular_name %> in @<%= plural_name %> %>
-    <tr>
-    <%- for attribute in attributes -%>
-      <td><%%=h <%= singular_name %>.<%= attribute.name %> %></td>
-    <%- end -%>
-    <%- if action? :show -%>
-      <td><%%= link_to "Show", <%= singular_name %> %></td>
-    <%- end -%>
-    <%- if action? :edit -%>
-      <td><%%= link_to "Edit", edit_<%= singular_name %>_path(<%= singular_name %>) %></td>
-    <%- end -%>
-    <%- if action? :destroy -%>
-      <td><%%= link_to "Destroy", <%= singular_name %>, :confirm => 'Are you sure?', :method => :delete %></td>
-    <%- end -%>
-    </tr>
+    <%%= render <%= singular_name %> %>
   <%% end %>
 </table>
 <%- if options[:will_paginate] -%>
 <p><%%= will_paginate @<%= plural_name %> %></p>
 <%- end -%>
 <%- if action? :new -%>
-<p><%%= link_to "New <%= singular_name.titleize %>", new_<%= singular_name %>_path %></p>
+<p><%%= link_to t('<%= singular_name %>.actions.new'), new_<%= singular_name %>_path<%= ", :id => 'get_new_#{singular_name}', :class => 'remote-get'" if options[:jquery] %>%></p>
 <%- end -%>

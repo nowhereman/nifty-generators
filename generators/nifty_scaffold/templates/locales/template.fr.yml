@@ -1,0 +1,63 @@
+fr:
+  activerecord:
+    models:
+      <%= singular_name %>: "<%= class_name %>"       
+    attributes:
+      <%= singular_name %>:
+        <%- attributes.each do |a| -%>
+        <%= a.name %>: "<%= a.name.humanize %>"
+        <%- end -%>
+        
+  <%= singular_name %>:
+    actions:
+      list: "Voir tous(tes) les <%= plural_class_name %>"
+      new: "Ajouter un(e) <%= singular_name %>"
+    errors:
+      not_found: "<%= class_name %> n'existe pas."
+    create:
+      flash: "<%= class_name %> a été créé(e)."
+    destroy:      
+      flash: "<%= class_name %> a été supprimé(e)."
+      title: "Supprimer ce(tte) <%= singular_name %>"
+    edit:
+      title: "Modifier ce(tte) <%= singular_name %>"
+    index:
+      title: "<%= plural_class_name %>"
+    new:
+      title: "Ajouter un(e) <%= singular_name %>"
+    update:
+      flash: "<%= class_name %> a été modifié(e)."
+
+  flash:
+    <%= plural_name %>:
+      create:
+        notice: "<%= class_name %> a été créé(e)"
+        alert: "<%= class_name %> n'a pas pu être créé(e)"
+      update:
+        notice: "<%= class_name %> a été modifié(e)"
+        alert: "<%= class_name %> n'a pas pu être modifié(e)"
+      destroy:
+        notice: "<%= class_name %> a été supprimé(e)"
+        alert: "<%= class_name %> n'a pas pu être supprimé(e)"
+
+  formtastic:
+    titles:
+      <%= singular_name %>_details: "Contenu de ce(tte) <%= class_name %>"
+    labels:
+      <%= singular_name %>:
+        <%- attributes.each do |a| -%>
+        <%= a.name %>: "<%= a.name.humanize %>"
+        <%- end -%>
+        edit:
+          <%- attributes.each do |a| -%>
+          <%= a.name %>: "Modifier le(la) <%= a.name.humanize %>"
+          <%- end -%>
+    hints:
+      <%= singular_name %>:
+        <%- attributes.each do |a| -%>
+        <%= a.name %>: "Astuce pour <%= a.name.humanize %>"
+        <%- end -%>
+    actions:
+      create: "Ajouter un(e) {{model}}"
+      update: "Enregistrer les changements"
+      dummie: "Démarrer!"

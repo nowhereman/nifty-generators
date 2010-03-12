@@ -1,0 +1,8 @@
+fr:
+  formtastic:
+    "yes": 'Oui'
+    "no": 'Non'
+    create: 'Ajouter'
+    save: 'Enregistrer'
+    submit: 'Envoyer'
+    required: 'Obligatoire'

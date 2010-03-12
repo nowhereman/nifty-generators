@@ -1,0 +1,108 @@
+fr:
+  common:
+    language: Français
+
+    actions:
+      account: Compte utilisateur
+      account_of: "Compte de %s"
+      add: Ajouter
+      add_above: Ajouter au dessus
+      add_below: Ajouter en dessous
+      add_left: Ajouter à gauche
+      add_right: Ajouter à droite
+      answer: Réponse
+      back: Retour
+      browse_back: Reculer d'une page
+      browse_forward: Avancer d'une page
+      cancel: Annuler
+      change: Changer
+      close: Fermer
+      copy: Copier
+      create: Créer
+      create_and_continue: Créer et continuer
+      delete: Effacer
+      destroy: Supprimer
+      display: Afficher
+      done: Effectuer
+      download: Télécharger
+      edit: Modifier
+      find: Chercher
+      generate: Générer
+      help: Aide
+      hide: Cacher
+      home: Accueil
+      import: Importer
+      invite: Inviter
+      larger: Élargir
+      login: Connexion
+      logout: Déconnexion
+      logout_as: Déconnecté en tant que "%s"
+      more: Plus
+      more_information: Plus d'informations
+      new: Nouveau
+      next: Suivant(e)
+      next_page: Page suivante
+      ok: OK
+      open: Ouvrir
+      overview: Vue d'ensemble
+      owner: Propriétaire
+      preview: Aperçu
+      previous_page: Page précédente
+      print: Imprimer
+      refresh: Actualiser
+      register: Inscription
+      register_continue: Continuer l'inscription
+      remove: Enlever
+      reply: Répondre
+      reset: Réinitialiser
+      save: Enregistrer
+      save_and_continue: Enregistrer et continuer
+      search: Rechercher
+      select: Choisir
+      send: Envoyer
+      settings: Paramètres
+      show: Voir
+      signup: S'inscrire
+      smaller: Diminuer
+      style: Style
+      update: Mettre à jour
+      upload: Envoyer le fichier
+      users: Utilisateurs
+
+    errors:
+      access_denied: Vous n'êtes pas autorisé à afficher la page demandée!
+      cant_close_window: "La fenêtre ne peut pas se fermer automatiquement?"
+      login_required: Vous devez vous identifier pour effectuer cette action.
+      no_data: Aucune donnée n'a été trouvée...
+      no_javascript: Le Javascript est obligatoire
+
+    in_place_edit:
+      cancel: Annuler
+      click_to_edit: Cliquer pour modifier...
+      click_tools_to_edit: Cliquer sur la barre d'icônes pour modifier...
+      loading: Chargement...
+      ok: OK
+      saving: Enregistrement en cours...
+
+    labels:
+      and: "et"
+      and_or: "et/ou"
+      are_you_sure: Etes vous sûr?
+      confirmed: confirmé
+      hits: %s visites
+      hours: heures
+      loading: Chargement...
+      "no": "Non"
+      or: "ou"
+      page: Page
+      unconfirmed: non confirmé
+      "yes": "Oui"
+
+    languages:
+      de: Allemand
+      en: Anglais
+      fr: Français
+
+    googlemap:
+      incompatible_browser: "Ce navigateur Internet ne peut pas afficher Google Maps."
+      loading: Chargement de Google Map...

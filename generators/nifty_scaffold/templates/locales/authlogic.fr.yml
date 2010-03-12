@@ -1,0 +1,40 @@
+fr:
+  authlogic:
+    error_messages:
+      login_blank: ne peut pas être vide
+      login_not_found: n'est pas valide
+      login_invalid: ne peut contenir que des chiffres, des lettres, des espaces et les caractères .-_@.
+      consecutive_failed_logins_limit_exceeded: Le nombre d'essai pour s'identifier a été dépassé, votre compté est vérouillé.
+      email_invalid: doit être une adresse électronique valide.
+      password_blank: ne peut pas être vide
+      password_invalid: n'est pas correct
+      not_active: Votre compte n'a pas encore été activé
+      not_confirmed: Votre compte n'a pas encore été confirmé
+      not_approved: Votre compte n'a pas encore été approuvé
+      no_authentication_details: Vous n'avez saisis aucune informations pour vous identifier.
+    actions:
+      login:
+        notice: Vous êtes maintenant connecté.
+        alert: Identifiant ou mot de passe incorrects.
+      logout:
+        notice: Vous êtes maintenant déconnecté.
+        alert: La déconnexion a échoué.
+    models:
+      user_session: "Session de l'utilisateur"
+    attributes:
+      user_session:
+        login: identifiant
+        username: "nom d'utilisateur"
+        email: email
+        password: mot de passe
+        remember_me: rester connecté
+      
+  activerecord:
+    models:
+      user: Utilisateur
+    attributes:
+      user:
+        username: nom d'utilisateur
+        email: email
+        password: mot de passe
+        password_confirmation: confirmer le mot de passe

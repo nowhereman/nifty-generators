@@ -1,0 +1,66 @@
+# Borrowed from : http://github.com/ulbrich/localized_scaffold/blob/master/generators/localized_scaffold/templates/locale/en.yml
+en:
+  activerecord:
+    models:
+      <%= singular_name %>: "<%= class_name %>"
+    attributes:
+      <%= singular_name %>:
+        <%- attributes.each do |a| -%>
+        <%= a.name %>: "<%= a.name.humanize %>"
+        <%- end -%>
+        
+  <%= singular_name %>:
+    actions:
+      list: "List <%= plural_name %>"
+      new: "New <%= singular_name %>"
+    errors:
+      not_found: "<%= class_name %> not found."
+    create:
+      flash: "<%= class_name %> was successfully created."
+    destroy:
+      flash: "<%= class_name %> was successfully deleted."
+      title: "Destroy <%= singular_name %>"
+    edit:
+      title: "Editing <%= singular_name %>"
+    index:
+      title: "Listing <%= plural_name %>"
+    new:
+      title: "New <%= singular_name %>"
+    update:
+      flash: "<%= class_name %> was successfully updated."
+
+# Source : http://github.com/plataformatec/responders/blob/master/README.rdoc
+  flash:
+    <%= plural_name %>:
+      create:
+        notice: "<%= class_name %> was successfully created"
+        alert: "<%= class_name %> could not be created"
+      update:
+        notice: "<%= class_name %> was successfully updated"
+        alert: "<%= class_name %> could not be updated"
+      destroy:
+        notice: "<%= class_name %> was successfully destroyed"
+        alert: "<%= class_name %> could not be destroyed"
+
+# Source : http://github.com/justinfrench/formtastic/blob/master/README.textile
+  formtastic:
+    titles:
+      <%= singular_name %>_details: "<%= class_name %> details"
+    labels:
+      <%= singular_name %>:
+        <%- attributes.each do |a| -%>
+        <%= a.name %>: "<%= a.name.humanize %>"
+        <%- end -%>
+        edit:
+          <%- attributes.each do |a| -%>
+          <%= a.name %>: "Edit <%= a.name.humanize %>"
+          <%- end -%>
+    hints:
+      <%= singular_name %>:
+        <%- attributes.each do |a| -%>
+        <%= a.name %>: "Hint for <%= a.name.humanize %>"
+        <%- end -%>
+    actions:
+      create: "Create my {{model}}"
+      update: "Save changes"
+      dummie: "Launch!"

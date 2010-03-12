@@ -1,0 +1,9 @@
+# Source : http://github.com/justinfrench/formtastic/blob/master/lib/locale/en.yml
+en:
+  formtastic:
+    "yes": 'Yes'
+    "no": 'No'
+    create: 'Create'
+    save: 'Save'
+    submit: 'Submit'
+    required: 'Required'
