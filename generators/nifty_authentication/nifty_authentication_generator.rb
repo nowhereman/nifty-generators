@@ -16,7 +16,7 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.directory "app/helpers"
       m.directory "app/views"
       m.directory "lib"
-      
+
       m.directory "app/views/#{user_plural_name}"
       m.template "user.rb", "app/models/#{user_singular_name}.rb"
       m.template "authlogic_session.rb", "app/models/#{user_singular_name}_session.rb" if options[:authlogic]
@@ -40,7 +40,32 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.route_name :signup, 'signup', :controller => user_plural_name, :action => 'new'
       
       m.insert_into "app/controllers/#{application_controller_name}.rb", 'include Authentication'
-      
+
+      if options[:declarative_authorization]
+        m.template "assignment.rb", "app/models/assignment.rb"
+        m.template "role.rb", "app/models/role.rb"
+
+        m.sleep 1
+        m.migration_template "roles_migration.rb", "db/migrate", :migration_file_name => "create_roles"
+        m.sleep 1
+        m.migration_template "assignments_migration.rb", "db/migrate", :migration_file_name => "create_assignments"
+
+        m.insert_into "app/controllers/#{application_controller_name}.rb", <<-CODE
+before_filter { |c| Authorization.current_user = c.current_user }
+
+  protected
+
+    def permission_denied
+      flash[:alert] = I18n.t('common.errors.access_denied', :default => 'Sorry, you are not allowed to access that page.')
+      redirect_to root_url
+    end
+
+  public
+
+CODE
+
+      end
+
       if test_framework == :rspec
         m.directory "spec"
         m.directory "spec/fixtures"
@@ -99,6 +124,14 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
     Rails.version >= '2.3.0' ? 'application_controller' : 'application'
   end
 
+  def after_generate
+    if options[:declarative_authorization]
+      `rake db:migrate`
+      Role.create(:name => "admin")
+      Role.create(:name => "user")
+    end
+  end
+
 protected
   
   def view_language
@@ -117,6 +150,7 @@ protected
     opt.on("--shoulda", "Use Shoulda for test files.") { options[:test_framework] = :shoulda }
     opt.on("--haml", "Generate HAML views instead of ERB.") { |v| options[:haml] = true }
     opt.on("--authlogic", "Use Authlogic for authentication.") { |v| options[:authlogic] = true }
+    opt.on("--declarative_authorization", "Use Declarative Authorization for authorization.") { options[:declarative_authorization] = true }
   end
   
   def banner

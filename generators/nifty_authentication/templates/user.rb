@@ -1,6 +1,16 @@
 class <%= user_class_name %> < ActiveRecord::Base
 <%- if options[:authlogic] -%>
   acts_as_authentic
+  <%- if options[:declarative_authorization] -%>
+  has_many :assignments
+  has_many :roles, :through => :assignments
+
+  def role_symbols
+    roles.map do |role|
+      role.name.underscore.to_sym
+    end
+  end
+  <%- end -%>
 <%- else -%>
   # new columns need to be added here to be writable through mass assignment
   attr_accessible :username, :email, :password, :password_confirmation
