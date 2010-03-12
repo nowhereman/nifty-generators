@@ -4,9 +4,16 @@
   <head>
     <title><%%= h(yield(:title) || "Untitled") %></title>
     <%%= stylesheet_link_tag '<%= file_name %>' %>
-    <%= include_javascripts :workspace %>
-    <%= include_templates :everything %>
+    <%- if options[:jammit] -%>
+    <%%= raw include_stylesheets(:common, :media => 'all') %>
+    <%%= raw include_javascripts :workspace %>
+
+    <%%= raw yield(:js_views) %>
+    <%- end -%>
     <%- if options[:jquery] -%>
+      <%- unless options[:jammit] -%>
+    <%%= javascript_include_tag 'jquery', 'jquery.livequery', 'application' %>
+      <%- end -%>
     <%%= raw yield_authenticity_token %>
     <%- end -%>
     <%%= yield(:head) %>

@@ -20,6 +20,15 @@ module LayoutHelper
     content_for(:head) { javascript_include_tag(*args) }
   end
 
+  # Useful for Jammit
+  def include_js_views(*args)
+    args = ["#{controller_name}_#{action_name}"]  if args.blank?
+    args.each do |arg|
+      content_for(:js_views) { include_javascripts arg }
+    end
+  end
+  alias :include_js_view :include_js_views
+
   # Useful for jQuery
   def show_flash_message (flash_action = flash.keys.first)
 <<JAVASCRIPT
