@@ -24,6 +24,7 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.template "users_helper.rb", "app/helpers/#{user_plural_name}_helper.rb"
       m.template "views/#{view_language}/signup.html.#{view_language}", "app/views/#{user_plural_name}/new.html.#{view_language}"
       
+      m.template "views/#{view_language}/_form.html.#{view_language}", "app/views/#{user_plural_name}/_form.html.#{view_language}"
       m.directory "app/views/#{session_plural_name}"
       m.template "sessions_controller.rb", "app/controllers/#{session_plural_name}_controller.rb"
       m.template "sessions_helper.rb", "app/helpers/#{session_plural_name}_helper.rb"

@@ -1,0 +1,32 @@
+<%% form_for @<%= user_singular_name %> do |f| %>
+  <%%= f.error_messages %>
+  <p>
+    <%%= f.label :username, t('activerecord.attributes.<%= user_singular_name %>.username').capitalize %><br />
+    <%%= f.text_field :username %>
+  </p>
+  <p>
+    <%%= f.label :email, t('activerecord.attributes.<%= user_singular_name %>.email').capitalize %><br />
+    <%%= f.text_field :email %>
+  </p>
+  <p>
+    <%%= f.label :password, t('activerecord.attributes.<%= user_singular_name %>.password').capitalize %><br />
+    <%%= f.password_field :password %>
+  </p>
+  <p>
+    <%%= f.label :password_confirmation, t('activerecord.attributes.<%= user_singular_name %>.password_confirmation', :default => 'Confirm password').capitalize %><br />
+    <%%= f.password_field :password_confirmation %>
+  </p>
+  <%- if options[:declarative_authorization] -%>
+  <%% if Assignment.new(:user => @user, :role => Role.find_by_name('admin')).permitted_to? :create %>
+  <p>
+    <%%= f.label :roles %><br />
+    <%% for role in Role.all %>
+      <%%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
+      <%%=h role.name %><br />
+    <%% end %>
+  </p>
+  <%% end %>
+  <%- end -%>
+  <%% action = (params[:action] == 'new') ? 'signup' : params[:action] %>
+  <p><%%= f.submit t("common.actions.#{action}", :default => 'Sign up') %></p>
+<%% end %>
