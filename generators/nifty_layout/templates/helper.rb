@@ -19,4 +19,14 @@ module LayoutHelper
   def javascript(*args)
     content_for(:head) { javascript_include_tag(*args) }
   end
+
+  # Useful for jQuery
+  def show_flash_message (flash_action = flash.keys.first)
+<<JAVASCRIPT
+    $("div.flash").remove();
+    var flash_message = $("<div id='flash_#{flash_action}' class='flash'>#{h(flash[flash_action.to_sym])}</div>");
+    $("div#container").prepend(flash_message);
+JAVASCRIPT
+  end
+  
 end

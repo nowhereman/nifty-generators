@@ -18,6 +18,10 @@ class NiftyLayoutGenerator < Rails::Generator::Base
         m.template "layout.html.erb", "app/views/layouts/#{file_name}.html.erb"
         m.file     "stylesheet.css",  "public/stylesheets/#{file_name}.css"
       end
+      if options[:jquery]
+        m.file 'application_helper.rb', 'app/helpers/application_helper.rb'# Modified application_helper.rb to be jQuery compatible
+        m.file 'application.js', 'public/javascripts/application.js'# Create application.js to be jQuery compatible
+      end
       m.file "helper.rb", "app/helpers/layout_helper.rb"
     end
   end
@@ -32,6 +36,7 @@ class NiftyLayoutGenerator < Rails::Generator::Base
       opt.separator ''
       opt.separator 'Options:'
       opt.on("--haml", "Generate HAML for view, and SASS for stylesheet.") { |v| options[:haml] = v }
+      opt.on("--jquery", "Use jQuery unobtrusive goodness.") { |v| options[:jquery] = v }
     end
 
     def banner
