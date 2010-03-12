@@ -27,9 +27,10 @@ a {
   margin-top: 20px;
 }
 
-#flash_notice, #flash_error {
+#flash_notice, #flash_error, #flash_alert {
   padding: 5px 8px;
   margin: 10px 0;
+  width: 70%;
 }
 
 #flash_notice {
@@ -37,7 +38,7 @@ a {
   border: solid 1px #6C6;
 }
 
-#flash_error {
+#flash_error, #flash_alert {
   background-color: #FCC;
   border: solid 1px #C66;
 }
@@ -60,7 +61,7 @@ a {
   font-weight: bold;
   padding: 5px 5px 5px 15px;
   font-size: 12px;
-  margin: 0;
+  margin: 0px;
   background-color: #c00;
   color: #fff;
 }
