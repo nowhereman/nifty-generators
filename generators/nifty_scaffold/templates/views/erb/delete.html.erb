@@ -1,0 +1,7 @@
+<%% title t('<%= singular_name %>.destroy.title').titleize %>
+
+<h2><%%= t('common.labels.are_you_sure').titleize %></h2>
+<%% form_for @<%= singular_name %>, :html => { :method => 'delete' } do |f| %>
+    <%%= submit_tag t('common.labels.yes') %>
+    <%%= submit_tag t('common.labels.no'), :name => :cancel %>
+<%% end %>

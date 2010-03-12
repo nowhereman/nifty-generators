@@ -18,6 +18,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         @controller_actions << arg
         @controller_actions << 'create' if arg == 'new'
         @controller_actions << 'update' if arg == 'edit'
+        @controller_actions << 'delete' if arg == 'destroy'
       end
     end
 
@@ -93,6 +94,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
           if options[:jquery] && [:new, :create, :edit, :update, :destroy].include?(action.to_sym)
             m.template "views/#{view_language}/#{action}.js.#{view_language}", "app/views/#{plural_name}/#{action}.js.#{view_language}"
           end
+          m.template "views/#{view_language}/delete.html.#{view_language}", "app/views/#{plural_name}/delete.html.#{view_language}" if action == 'destroy'
           if File.exist? source_path("views/#{view_language}/#{action}.html.#{view_language}")
             m.template "views/#{view_language}/#{action}.html.#{view_language}", "app/views/#{plural_name}/#{action}.html.#{view_language}"
           end
@@ -126,7 +128,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   end
 
   def all_actions
-    %w[index show new create edit update destroy]
+    %w[index show new create edit update destroy delete]
   end
 
   def all_locales
@@ -217,13 +219,16 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     test_framework == :rspec
   end
 
-  
+
   def rspec_mocha_mocks?
     rspec_mock_with == :mocha
   end
 
   def after_generate
     m = Rails::Generator::Commands::Create.new(self)
+    #Replace route of the controller, in config/routes.rb
+    replace_with("config/routes.rb","map.resources :#{plural_name}","  map.resources :#{plural_name}, :member => { :delete => :get }") if controller_actions.include?('destroy')
+
     locales = (options[:multilanguage]) ? all_locales : [ I18n.default_locale ]
 
     locales.each do |locale|
@@ -291,11 +296,26 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
       ""
   end
 
+  def gsub_file(relative_destination, regexp, *args, &block)
+    path = destination_path(relative_destination)
+    content = File.read(path).gsub(regexp, *args, &block)
+    File.open(path, 'wb') { |file| file.write(content) }
+  end
+
+  def replace_with(file, pattern, line)
+    regex = pattern ? "\s*#{Regexp.escape(pattern)}\s*" : "(class|module) .+"
+
+    gsub_file file, /^#{regex}$/ do |match|
+      line
+    end
+  end
+
+
   def banner
     <<-EOS
 Creates a controller and optional model given the name, actions, and attributes.
 
 USAGE: #{$0} #{spec.name} ModelName [controller_actions and model:attributes] [options]
-EOS
+    EOS
   end
 end

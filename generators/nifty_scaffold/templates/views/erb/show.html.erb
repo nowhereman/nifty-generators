@@ -12,7 +12,7 @@
   <%%= link_to t('<%= singular_name %>.edit.title'), edit_<%= singular_name %>_path(@<%= singular_name %>) %> |
 <%- end -%>
 <%- if action? :destroy -%>
-  <%%= link_to "Destroy", @<%= singular_name %>, :confirm => 'Are you sure?', :method => :delete %> |
+  <%%= link_to t('<%= singular_name %>.destroy.title'), delete_<%= singular_name %>_path(@<%= singular_name %>)<%= ",  :class => 'remote-delete',  :'data-confirm' => t('common.labels.are_you_sure')" if options[:jquery] %> %> |
 <%- end -%>
 <%- if action? :index -%>
   <%%= link_to t('<%= singular_name %>.actions.list'), <%= plural_name %>_path %>
