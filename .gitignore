@@ -2,4 +2,4 @@ Manifest
 pkg
 doc
 /nbproject
-
+*.gem
