@@ -7,11 +7,11 @@ Gem::Specification.new do |s|
   s.version = "0.3.2"
   s.date = "2010-02-16"
   
-  s.authors = ["Ryan Bates"]
+  s.authors = ["Ryan Bates", "Nowhere Man"]
   s.email = "ryan@railscasts.com"
   
   s.require_paths = ["lib"]
-  s.files = Dir["lib/**/*"] + Dir["test/**/*"] + Dir["rails_generators/**/*"] + ["LICENSE", "README.rdoc", "Rakefile", "CHANGELOG"]
+  s.files = Dir["lib/**/*"] + Dir["test/**/*"] + Dir["generators/**/*"] + ["LICENSE", "README.rdoc", "Rakefile", "CHANGELOG"]
   s.extra_rdoc_files = ["README.rdoc", "CHANGELOG", "LICENSE"]
   
   s.has_rdoc = true
