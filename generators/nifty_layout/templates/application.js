@@ -17,7 +17,9 @@ $(document).ready(function()
       return;
 
     if (s.data)
+    {
       s.data = s.data + "&";
+    }
     else 
     {
       s.data = "";
