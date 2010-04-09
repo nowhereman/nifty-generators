@@ -151,7 +151,7 @@ protected
     opt.on("--shoulda", "Use Shoulda for test files.") { options[:test_framework] = :shoulda }
     opt.on("--haml", "Generate HAML views instead of ERB.") { options[:haml] = true }
     opt.on("--authlogic", "Use Authlogic for authentication.") { options[:authlogic] = true }
-    opt.on("--declarative_authorization", "Use Declarative Authorization for authorization.") { options[:declarative_authorization] = true }
+    opt.on("--declarative-authorization", "Use Declarative Authorization for authorization.") { options[:declarative_authorization] = true }
   end
 
   def banner
