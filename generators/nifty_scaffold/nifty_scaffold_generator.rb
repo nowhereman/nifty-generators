@@ -226,6 +226,8 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   end
 
   def after_generate
+    `./script/generate hobo_migration create_#{plural_name} --default-name --migrate` if options[:hobofields]
+    
     m = Rails::Generator::Commands::Create.new(self)
     #Replace route of the controller, in config/routes.rb
     replace_with("config/routes.rb","map.resources :#{plural_name}","  map.resources :#{plural_name}, :member => { :delete => :get }") if controller_actions.include?('destroy')
@@ -278,6 +280,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     opt.on("--jquery", "Use jQuery unobtrusive goodness.") { |v| options[:jquery] = v }
     opt.on("--multilanguage", "Generate multilanguage files") { |v| options[:multilanguage] = v }
     opt.on("--haml", "Generate HAML views instead of ERB.") { |v| options[:haml] = v }
+    opt.on("--hobofields", "Rich field types and migration-generator.") do |v|
+      options[:hobofields] = v
+      options[:skip_migration] = v if v
+    end
     opt.on("--inherited-resources", "Generate inherited-resources controller instead of conventional.") { |v| options[:inherited_resources] = v }
     opt.on("--will-paginate", "Generate will-paginate code.") { |v| options[:will_paginate] = v }
     opt.on("--formtastic", "Generate formtastic forms.") { |v| options[:formtastic] = v }
