@@ -226,7 +226,10 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
   end
 
   def after_generate
-    `./script/generate hobo_migration create_#{plural_name} --default-name --migrate` if options[:hobofields]
+    if options[:hobofields]
+      migration_name = (options[:skip_model])? "update_#{plural_name}" : "create_#{plural_name}"
+      `./script/generate hobo_migration #{migration_name} --default-name --migrate`
+    end
     
     m = Rails::Generator::Commands::Create.new(self)
     #Replace route of the controller, in config/routes.rb
