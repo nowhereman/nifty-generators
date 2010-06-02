@@ -9,6 +9,6 @@ if(old_div.length == 0) {
 }
 new_div.append($("<a name='edit_<%= singular_name %>'></a>"))
   .append($("<h2><%%=  t('<%= singular_name %>.edit.title').titleize %></h2>"))
-  .append($("<%%= escape_javascript render("form", :remote_class => "remote-put") %>"));
+  .append($("<%%= escape_javascript render("form", :data_method => "put") %>"));
 window.location.hash = "#edit_<%= singular_name %>";
 $("div#edit_<%= singular_name %>_<%%= params[:id] %> > form").find("input:visible, select:visible").get(0).focus();

@@ -7,7 +7,7 @@
     <%% @<%= singular_name %> = <%= class_name %>.new %>
     new_div.append($("<a name='new_<%= singular_name %>'></a>"))
       .append($("<h2><%%=  t('<%= singular_name %>.new.title').titleize %></h2>"))
-      .append($("<%%= escape_javascript render("form", :remote_class => "remote-post") %>"));
+      .append($("<%%= escape_javascript render("form", :data_method => "post") %>"));
     window.location.hash = "#";
   <%% end %>
 <%% else %>

@@ -20,7 +20,7 @@ $(document).ready(function()
     {
       s.data = s.data + "&";
     }
-    else 
+    else
     {
       s.data = "";
       // if there was no data, jQuery didn't set the content-type
@@ -49,18 +49,17 @@ jQuery.fn.submitWithAjax = function() {
 
 // More behaviours
 $(document).ready(function() {
-  // All A tags with class 'remote-get', 'remote-post', 'remote-put' or 'remote-delete' will perform an ajax call
-  $('a.remote-get').live('click', function(e)
+  // All A and FORM tags with attribute 'data-remote' and values 'get', 'post', 'put' or 'delete' will perform an ajax call
+  $('a[data-remote=true][data-method=get]').live('click', function(e)
   {
     $.getScript($(this).attr('href'));
     e.preventDefault();
   }).attr("rel", "nofollow");
 
-  $.each(['remote-post', 'remote-put', 'remote-delete'], function(index, className) {
-    var method = className.replace(/^remote\-(.+)$/,'$1');
-    $('a.' + className).live('click', function(e) 
+  $.each(['post', 'put', 'delete'], function(index, method) {
+    $('a[data-remote=true][data-method=' + method + ']').live('click', function(e)
     {
-      if ($(this).attr('data-confirm') && !confirm($(this).attr('data-confirm'))) 
+      if ($(this).attr('data-confirm') && !confirm($(this).attr('data-confirm')))
         return false;
 
       if(method == 'delete')
@@ -75,7 +74,7 @@ $(document).ready(function() {
       e.preventDefault();
     }).attr("rel", "nofollow");
 
-    $('form.' + className).submitWithAjax();
+    $('form[data-remote=true][data-method=' + method + ']').submitWithAjax();
   });
 
 });

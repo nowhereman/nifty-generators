@@ -1,4 +1,4 @@
-<%% semantic_form_for @<%= singular_name %><%- if options[:jquery] -%>, :html => { :class => remote_class ||= '' } <%- end -%>do |form| %>
+<%% semantic_form_for @<%= singular_name %><%- if options[:jquery] -%>, :html => { :data-remote => true, :data-method => data_method ||= '' } <%- end -%>do |form| %>
   <%% form.inputs do %>
 <%- for attribute in attributes -%>
     <%%= form.input :<%= attribute.name %> %>
