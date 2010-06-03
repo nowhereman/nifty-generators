@@ -1,6 +1,6 @@
 # Source: http://github.com/svenfuchs/rails-i18n/tree/master/rails/locale/fr.yml
 #
-# French translations for Ruby on Rails
+# French translations for Ruby on Rails 
 # by Christian Lescuyer (christian@flyingcoders.com)
 # contributor: Sebastien Grosjean - ZenCocoon.com
 
@@ -18,7 +18,7 @@ fr:
     month_names: [~, janvier, février, mars, avril, mai, juin, juillet, août, septembre, octobre, novembre, décembre]
     abbr_month_names: [~, jan., fév., mar., avr., mai, juin, juil., août, sept., oct., nov., déc.]
     order: [ :day, :month, :year ]
-
+  
   time:
     formats:
       default: "%d %B %Y %H:%M"
@@ -34,60 +34,60 @@ fr:
     distance_in_words:
       half_a_minute: "une demi-minute"
       less_than_x_seconds:
-        zero: "moins d'une seconde"
-        one: "moins de 1 seconde"
-        other: "moins de {{count}} secondes"
+        zero:  "moins d'une seconde"
+        one:   "moins de 1 seconde"
+        other: "moins de {{count}} secondes"
       x_seconds:
-        one: "1 seconde"
-        other: "{{count}} secondes"
+        one:   "1 seconde"
+        other: "{{count}} secondes"
       less_than_x_minutes:
-        zero: "moins d'une minute"
-        one: "moins de 1 minute"
-        other: "moins de {{count}} minutes"
+        zero:  "moins d'une minute"
+        one:   "moins de 1 minute"
+        other: "moins de {{count}} minutes"
       x_minutes:
-        one: "1 minute"
-        other: "{{count}} minutes"
+        one:   "1 minute"
+        other: "{{count}} minutes"
       about_x_hours:
-        one: "environ une heure"
-        other: "environ {{count}} heures"
+        one:   "environ une heure"
+        other: "environ {{count}} heures"
       x_days:
-        one: "1 jour"
-        other: "{{count}} jours"
+        one:   "1 jour"
+        other: "{{count}} jours"
       about_x_months:
-        one: "environ un mois"
-        other: "environ {{count}} mois"
+        one:   "environ un mois"
+        other: "environ {{count}} mois"
       x_months:
-        one: "1 mois"
-        other: "{{count}} mois"
+        one:   "1 mois"
+        other: "{{count}} mois"
       about_x_years:
-        one: "environ un an"
-        other: "environ {{count}} ans"
+        one:   "environ un an"
+        other: "environ {{count}} ans"
       over_x_years:
-        one: "plus d'un an"
-        other: "plus de {{count}} ans"
+        one:   "plus d'un an"
+        other: "plus de {{count}} ans"
     prompts:
-      year: "Année"
-      month: "Mois"
-      day: "Jour"
-      hour: "Heure"
+      year:   "Année"
+      month:  "Mois"
+      day:    "Jour"
+      hour:   "Heure"
       minute: "Minute"
       second: "Seconde"
-
+  
   number:
     format:
       precision: 3
       separator: ','
-      delimiter: ' '
+      delimiter: ' '
     currency:
       format:
         unit: '€'
         precision: 2
-        format: '%n %u'
+        format: '%n %u'
     human:
       format:
         # These three are to override number.format and are optional
-        # separator:
-        delimiter: ""
+        # separator: 
+        delimiter: "" 
         precision: 2
       # Rails <= v2.2.2
       # storage_units: [octet, kb, Mb, Gb, Tb]
@@ -96,7 +96,7 @@ fr:
         format: "%n %u"
         units:
           byte:
-            one: "octet"
+            one:   "octet"
             other: "octets"
           kb: "ko"
           mb: "Mo"
@@ -113,14 +113,14 @@ fr:
     select:
       # default value for :prompt => true in FormOptionsHelper
       prompt: "Choisir..."
-
+  
   activerecord:
     errors:
       template:
-        header:
+        header: 
           one: "Impossible d'enregistrer {{model}}: 1 erreur"
           other: "Impossible d'enregistrer {{model}}: {{count}} erreurs."
-        body: "Veuillez vérifier les champs suivants :"
+        body: "Veuillez vérifier les champs suivants :"
       messages:
         inclusion: "n'est pas inclus(e) dans la liste"
         exclusion: "n'est pas disponible"
@@ -142,3 +142,4 @@ fr:
         odd: "doit être impair"
         even: "doit être pair"
         record_invalid: "La validation a échoué : {{errors}}"
+        
