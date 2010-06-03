@@ -5,7 +5,7 @@ A collection of useful Rails generator scripts for scaffolding, layout files, au
 
 == Install
 
-  gem install nifty-generators
+  gem install my-nifty-generators
 
 
 == Usage
