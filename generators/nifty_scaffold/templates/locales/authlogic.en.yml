@@ -21,7 +21,7 @@ en:
         notice: You have been logged out.
         alert: Logout failed.
     models:
-      user_session: User Session
+      user_session: user session
     attributes:
       user_session:
         login: login
@@ -33,6 +33,7 @@ en:
   activerecord:
     models:
       user: user
+      user_session: user session
     attributes:
       user:
         username: username

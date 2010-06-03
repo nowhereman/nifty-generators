@@ -20,7 +20,7 @@ fr:
         notice: Vous êtes maintenant déconnecté.
         alert: La déconnexion a échoué.
     models:
-      user_session: "Session de l'utilisateur"
+      user_session: "session de l'utilisateur"
     attributes:
       user_session:
         login: identifiant
@@ -32,6 +32,7 @@ fr:
   activerecord:
     models:
       user: Utilisateur
+      user_session: "session de l'utilisateur"
     attributes:
       user:
         username: nom d'utilisateur
