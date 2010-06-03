@@ -37,9 +37,7 @@ jQuery.ajaxSetup({
 });
 
 jQuery.fn.submitWithAjax = function() {
-  //jQuery 1.3.x .live() function doesn't support theses events : blur, focus, mouseenter, mouseleave, change and submit
-  //So we need to use jquery.livequery plugin
-  this.livequery('submit',function(e)
+  this.live('submit',function(e)
   {
     $.post(this.action, $(this).serialize(), null, "script");
     e.preventDefault();
