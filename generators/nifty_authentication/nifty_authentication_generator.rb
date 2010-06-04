@@ -54,6 +54,11 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
         m.insert_into "app/controllers/#{application_controller_name}.rb", <<-CODE
 before_filter { |c| Authorization.current_user = c.current_user }
 
+def method_missing(symbol, *args)
+  raise ActionController::RoutingError, "You must defined 'map.root' route in 'config/routes.rb'" if symbol == :root_url
+  super symbol, *args
+end
+
   protected
 
     def permission_denied
