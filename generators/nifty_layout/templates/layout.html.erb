@@ -27,7 +27,7 @@
       <%- if options[:authlogic] -%>
       <div id="user_nav">
         <%% if current_user %>
-          <%%= link_to t('common.actions.account', :default => 'Edit Profile'), edit_user_path(:current) %> |
+          <%%= link_to t('common.actions.account', :default => 'Edit Profile'), edit_user_path(current_user) %> |
           <%%= link_to t('common.actions.logout', :default => 'Logout').capitalize, logout_path %>
         <%% else %>
           <%%= link_to t('common.actions.register', :default => 'Register'), signup_path %> |
