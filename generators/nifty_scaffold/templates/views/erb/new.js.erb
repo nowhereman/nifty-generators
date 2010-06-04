@@ -1,3 +1,4 @@
+//<script type="text/javascript"><%%# Required by NetBeans for JS syntax highlighting and code completion %>
 $("div.flash").remove();
 <%% @<%= singular_name %> = <%= class_name %>.new %>
 var new_div = $("<div id='new_<%= singular_name %>'></div>");
@@ -7,3 +8,4 @@ new_div.append($("<a name='new_<%= singular_name %>'></a>"))
   .append($("<%%= escape_javascript render("form", :data_method => "post") %>"));
 window.location.hash = "#new_<%= singular_name %>";
 $("div#new_<%= singular_name %> > form").find("input:visible, select:visible").get(0).focus();
+//</script>
