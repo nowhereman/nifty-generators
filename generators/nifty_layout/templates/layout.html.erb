@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<%= I18n.default_locale %>" lang="<%= I18n.default_locale %>">
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <title><%%= h(yield(:title) || "Untitled") %></title>
+    <title><%%= h(yield(:title) || "Untitled") +
+      (" - #{APP_NAME}" if defined?(APP_NAME) ) +
+      (" - #{COMPAGNY_NAME}" if defined?(COMPAGNY_NAME) ) %></title>
     <%%= stylesheet_link_tag '<%= file_name %>' %>
     <%- if options[:formtastic] -%>
     <%%= stylesheet_link_tag 'formtastic', 'formtastic_changes' %>
