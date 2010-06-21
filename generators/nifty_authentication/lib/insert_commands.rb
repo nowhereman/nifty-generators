@@ -16,8 +16,14 @@ Rails::Generator::Commands::Create.class_eval do
     
     logger.route "map.#{name} '#{path}', :controller => '#{route_options[:controller]}', :action => '#{route_options[:action]}'"
     unless options[:pretend]
-      gsub_file 'config/routes.rb', /(#{Regexp.escape(sentinel)})/mi do |match|
-        "#{match}\n  map.#{name} '#{path}', :controller => '#{route_options[:controller]}', :action => '#{route_options[:action]}'"
+      if name.to_sym == :root
+        gsub_file 'config/routes.rb', /(#{Regexp.escape(sentinel)})/mi do |match|
+          "#{match}\n  map.#{name} :controller => '#{route_options[:controller]}', :action => '#{route_options[:action]}'"
+        end
+      else
+        gsub_file 'config/routes.rb', /(#{Regexp.escape(sentinel)})/mi do |match|
+          "#{match}\n  map.#{name} '#{path}', :controller => '#{route_options[:controller]}', :action => '#{route_options[:action]}'"
+        end
       end
     end
   end

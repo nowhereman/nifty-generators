@@ -40,6 +40,8 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.route_name :logout, 'logout', :controller => session_plural_name, :action => 'destroy'
       m.route_name :signup, 'signup', :controller => user_plural_name, :action => 'new'
 
+      m.route_name :root, 'root', :controller => session_plural_name, :action => 'new'
+      
       m.insert_into "app/controllers/#{application_controller_name}.rb", 'include Authentication'
 
       if options[:declarative_authorization]

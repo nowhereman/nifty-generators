@@ -1,6 +1,7 @@
 class <%= session_plural_class_name %>Controller < ApplicationController
 <%- if options[:authlogic] -%>
   def new
+    redirect_to edit_user_path(current_user) if current_user
     @<%= session_singular_name %> = <%= session_class_name %>.new
   end
   
