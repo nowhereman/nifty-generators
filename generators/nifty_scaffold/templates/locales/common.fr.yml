@@ -3,7 +3,7 @@ fr:
     language: Français
 
     actions:
-      account: Compte utilisateur
+      account: Mon compte
       account_of: "Compte de %s"
       add: Ajouter
       add_above: Ajouter au dessus
