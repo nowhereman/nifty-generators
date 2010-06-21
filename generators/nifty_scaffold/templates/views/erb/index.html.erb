@@ -14,5 +14,5 @@
 <%%= <%= singular_name %>_pagination @<%= plural_name %> %>
 <%- end -%>
 <%- if action? :new -%>
-<p><%%= link_to t('<%= singular_name %>.actions.new'), new_<%= singular_name %>_path<%= ", :id => 'get_new_#{singular_name}', :'data-remote' => true, :'data-method' => 'get'" if options[:jquery] %>%></p>
+<p><%%= link_to t('<%= singular_name %>.actions.new'), new_<%= singular_name %>_path<%= ", :id => 'get-new-#{singular_name}', :'data-remote' => true, :'data-method' => 'get'" if options[:jquery] %>%></p>
 <%- end -%>

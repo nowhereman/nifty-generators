@@ -27,18 +27,20 @@ a {
   margin-top: 20px;
 }
 
-#flash_notice, #flash_error, #flash_alert {
+/*.all-ie.not-ie9 #container { }*/ /* Example of IE specific CSS rules */
+
+#flash-notice, #flash-error, #flash-alert {
   padding: 5px 8px;
   margin: 10px 0;
   width: 70%;
 }
 
-#flash_notice {
+#flash-notice {
   background-color: #CFC;
   border: solid 1px #6C6;
 }
 
-#flash_error, #flash_alert {
+#flash-error, #flash-alert {
   background-color: #FCC;
   border: solid 1px #C66;
 }
@@ -81,7 +83,7 @@ a {
   list-style: disc;
 }
 
-#user_nav {
+#user-nav {
   float: right;
   font-size: 12px;
 }

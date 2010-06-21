@@ -1,16 +1,16 @@
 //<script type="text/javascript"><%%# Required by NetBeans for JS syntax highlighting and code completion %>
 $("div.flash").remove();
 
-var old_div = $("div#new_<%= singular_name %>, div[id^=edit_<%= singular_name %>]");
-var new_div = $("<div id='edit_<%= singular_name %>_<%%= params[:id] %>'></div>");
+var old_div = $("div#new-<%= singular_name %>, div[id^=edit-<%= singular_name %>]");
+var new_div = $("<div id='edit-<%= singular_name %>-<%%= params[:id] %>'></div>");
 if(old_div.length == 0) {
-  $("a#get_new_<%= singular_name %>").after(new_div).hide();
+  $("a#get-new-<%= singular_name %>").after(new_div).hide();
 } else {
   old_div.replaceWith(new_div);
 }
-new_div.append($("<a name='edit_<%= singular_name %>'></a>"))
+new_div.append($("<a name='edit-<%= singular_name %>'></a>"))
   .append($("<h2><%%=  t('<%= singular_name %>.edit.title').titleize %></h2>"))
   .append($("<%%= escape_javascript render("form", :data_method => "put") %>"));
-window.location.hash = "#edit_<%= singular_name %>";
-$("div#edit_<%= singular_name %>_<%%= params[:id] %> > form").find("input:visible, select:visible").get(0).focus();
+window.location.hash = "#edit-<%= singular_name %>";
+$("div#edit-<%= singular_name %>-<%%= params[:id] %> > form").find("input:visible, select:visible").get(0).focus();
 //</script>

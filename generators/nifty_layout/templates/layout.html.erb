@@ -6,15 +6,15 @@
     <title><%%= h(yield(:title) || "Untitled") +
       (" - #{APP_NAME}" if defined?(APP_NAME) ) +
       (" - #{COMPAGNY_NAME}" if defined?(COMPAGNY_NAME) ) %></title>
-    <%%= stylesheet_link_tag '<%= file_name %>' %>
-    <%- if options[:formtastic] -%>
-    <%%= stylesheet_link_tag 'formtastic', 'formtastic_changes' %>
-    <%- end -%>
     <%- if options[:jammit] -%>
     <%%= raw include_stylesheets(:common, :media => 'all') %>
     <%%= raw include_javascripts :workspace %>
-
     <%%= raw yield(:js_views) %>
+    <%- else -%>
+    <%%= stylesheet_link_tag '<%= file_name %>' %>
+    <%- end -%>
+    <%- if options[:formtastic] -%>
+    <%%= stylesheet_link_tag 'formtastic', 'formtastic_changes' %>
     <%- end -%>
     <%- if options[:jquery] -%>
       <%- unless options[:jammit] -%>
@@ -24,10 +24,15 @@
     <%- end -%>
     <%%= yield(:head) %>
   </head>
-  <body>
+  <!--[if IE 6]><body id="ie6" class="all-ie not-ie7 not-ie8 not-ie9"><![endif]-->
+  <!--[if IE 7]><body id="ie7" class="all-ie not-ie6 not-ie8 not-ie9"><![endif]-->
+  <!--[if IE 8]><body id="ie8" class="all-ie not-ie6 not-ie7 not-ie9"><![endif]-->
+  <!--[if IE 9]><body id="ie9" class="all-ie not-ie6 not-ie7 not-ie8"><![endif]-->
+  <!--[if (IE) & (!IE 6) & (!IE 7) & (!IE 8) & (!IE 9)]><body id="unknown-ie" class="all-ie not-ie6 not-ie7 not-ie8 not-ie9"><![endif]--> <!-- For legacy and new versions of Internet Explorer -->
+  <!--[if !IE]>--><body id="not-ie" class="not-ie not-ie6 not-ie7 not-ie8 not-ie9"><!--<![endif]-->
     <div id="container">
       <%- if options[:authlogic] -%>
-      <div id="user_nav">
+      <div id="user-nav">
         <%% if current_user %>
           <%%= link_to t('common.actions.account', :default => 'Edit Profile'), edit_user_path(current_user) %> |
           <%%= link_to t('common.actions.logout', :default => 'Logout').capitalize, logout_path %>
@@ -39,7 +44,7 @@
 
       <%- end -%>
       <%%- flash.each do |name, msg| -%>
-        <%%= content_tag :div, msg, :id => "flash_#{name}", :class => "flash" %>
+        <%%= content_tag :div, msg, :id => "flash-#{name}", :class => "flash" %>
       <%%- end -%>
       
       <%%- if show_title? -%>
