@@ -3,7 +3,7 @@
   <%%= raw show_flash_message %>
 
   <%% if flash[:notice] %>
-    $("#<%= plural_name %> #show-<%= singular_name %>_<%%= @<%= singular_name %>.id %>").replaceWith($("<%%= escape_javascript render('<%= singular_name %>') %>"));
+    $("#<%= plural_name %> #show-<%= singular_name %>-<%%= @<%= singular_name %>.id %>").replaceWith($("<%%= escape_javascript render('<%= singular_name %>') %>"));
     var new_div = $("<div id='new-<%= singular_name %>'></div>");
     $("div#edit-<%= singular_name %>-<%%= @<%= singular_name %>.id %>").replaceWith(new_div);
     <%% @<%= singular_name %> = <%= class_name %>.new %>
