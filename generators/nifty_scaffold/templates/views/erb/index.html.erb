@@ -6,9 +6,8 @@
     <th><%= attribute.column.human_name.titleize %></th>
   <%- end -%>
   </tr>
-  <%% for <%= singular_name %> in @<%= plural_name %> %>
-    <%%= render <%= singular_name %> %>
-  <%% end %>
+
+  <%%=render :partial => '<%= singular_name %>', :collection => @<%= plural_name %> %>
 </table>
 <%- if options[:will_paginate] -%>
 <%%= <%= singular_name %>_pagination @<%= plural_name %> %>
