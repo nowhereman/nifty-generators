@@ -36,14 +36,21 @@ jQuery.ajaxSetup({
   'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
 });
 
-jQuery.fn.submitWithAjax = function() {
+function submitWithAjax(e) {
+  var form = $(e.target).closest("form");
+  $.post(form.attr("action"), form.serialize(), null, "script");
+  e.preventDefault();
+}
+
+// Buggy with jQuery 1.4.2 and IEs
+/*jQuery.fn.submitWithAjax = function() {
   this.live('submit',function(e)
   {
     $.post(this.action, $(this).serialize(), null, "script");
     e.preventDefault();
   });
   return this;
-};
+};*/
 
 // More behaviours
 $(document).ready(function() {
@@ -72,7 +79,9 @@ $(document).ready(function() {
       e.preventDefault();
     }).attr("rel", "nofollow");
 
-    $('form[data-remote=true][data-method=' + method + ']').submitWithAjax();
+    $('form[data-remote=true][data-method=' + method + ']').live('submit', submitWithAjax);
+    //Fix jQuery 1.4.2 live submit bugs with IEs
+    $('form[data-remote=true][data-method=' + method + '] input[type=submit]').live('click', submitWithAjax);
   });
 
 });
