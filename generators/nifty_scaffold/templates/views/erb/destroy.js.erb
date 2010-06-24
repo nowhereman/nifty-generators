@@ -1,4 +1,5 @@
 //<script type="text/javascript"><%%# Required by NetBeans for JS syntax highlighting and code completion %>
+jQuery.noConflict()(function($){
 <%% unless flash.blank? %>
   <%%= raw show_flash_message %>
   <%% if flash[:notice] %>
@@ -16,4 +17,5 @@
   <%%= raw show_flash_message %>
 <%% end %>
 <%% flash.discard %>
+});
 //</script>
