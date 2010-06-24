@@ -34,7 +34,7 @@ module LayoutHelper
 <<JAVASCRIPT
     $("div.flash").remove();
     var flash_message = $("<div id='flash-#{flash_action}' class='flash'>#{h(flash[flash_action.to_sym])}</div>");
-    $("div#container").prepend(flash_message);
+    $("div#container div#content").prepend(flash_message);
 JAVASCRIPT
   end
   
