@@ -82,6 +82,7 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
         m.directory "app/controllers"
         if options[:inherited_resources]
           m.template "inherited_resources_controller.rb", "app/controllers/#{plural_name}_controller.rb"
+          m.template "inherited_resources_initializer.rb", "config/initializers/inherited_resources_actions.rb"
         else
           m.template "controller.rb", "app/controllers/#{plural_name}_controller.rb"
         end
