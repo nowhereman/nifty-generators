@@ -8,14 +8,20 @@ jQuery.noConflict()(function($){
   // All ajax requests will trigger the wants.js block
   // of +respond_to do |wants|+ declarations
   $.ajaxSetup({
-    'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")}
+    'beforeSend': function(xhr) {xhr.setRequestHeader("Accept", "text/javascript")},
+    'error': function() {
+      $("div.flash").remove();
+      var flash_message = $("<div id='flash-alert' class='flash'>An Ajax error has occurred.</div>");
+      $("div#container div#content").prepend(flash_message);
+      window.location.hash = "#";
+    }
   });
-  
-  function submitWithAjax(e) {
+
+  $.submitWithAjax = function(e) {
     var form = $(e.target).closest("form");
     $.post(form.attr("action"), form.serialize(), null, "script");
     e.preventDefault();
-  }
+  };
 
   // Buggy with jQuery 1.4.2 and IEs
   /*jQuery.fn.submitWithAjax = function() {
@@ -27,7 +33,7 @@ jQuery.noConflict()(function($){
     return this;
   };*/
 
-  $(document).ready(function($)
+  $(document).ready(function()
   {
   // Behaviours
     // All non-GET requests will add the authenticity token
@@ -79,11 +85,11 @@ jQuery.noConflict()(function($){
         e.preventDefault();
       }).attr("rel", "nofollow");
 
-      $('form[data-remote=true][data-method=' + method + ']').live('submit', submitWithAjax);
-      
+      $('form[data-remote=true][data-method=' + method + ']').live('submit', function(e) { $.submitWithAjax(e); });
+
       // Fix jQuery 1.4.2 live submit bug with IEs
       if($.browser.msie)
-        $('form[data-remote=true][data-method=' + method + '] input[type=submit]').live('click', submitWithAjax);
+        $('form[data-remote=true][data-method=' + method + '] input[type=submit]').live('click', function(e) { $.submitWithAjax(e); } );
     });
   });
 });
