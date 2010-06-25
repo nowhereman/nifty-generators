@@ -7,18 +7,18 @@
       (" - #{APP_NAME}" if defined?(APP_NAME) ) +
       (" - #{COMPAGNY_NAME}" if defined?(COMPAGNY_NAME) ) %></title>
     <%- if options[:jammit] -%>
-    <%%= raw include_stylesheets(:common, :media => 'all') %>
+    <%%= raw include_stylesheets(:common, :workspace, :media => 'all') %>
     <%%= raw include_javascripts :workspace %>
     <%%= raw yield(:js_views) %>
     <%- else -%>
     <%%= stylesheet_link_tag '<%= file_name %>' %>
-    <%- end -%>
-    <%- if options[:formtastic] -%>
+      <%- if options[:formtastic] -%>
     <%%= stylesheet_link_tag 'formtastic', 'formtastic_changes' %>
-    <%- end -%>
+      <%- end -%>
+    <%- end -%>    
     <%- if options[:jquery] -%>
       <%- unless options[:jammit] -%>
-    <%%= javascript_include_tag 'jquery', 'jquery.livequery', 'application' %>
+    <%%= javascript_include_tag 'jquery', 'application' %>
       <%- end -%>
     <%%= raw yield_authenticity_token %>
     <%- end -%>
