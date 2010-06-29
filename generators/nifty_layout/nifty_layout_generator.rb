@@ -20,11 +20,23 @@ class NiftyLayoutGenerator < Rails::Generator::Base
         else
           m.template "layout.html.erb", "app/views/layouts/#{file_name}.html.erb"
         end
-        m.file     "stylesheet.css",  "public/stylesheets/#{file_name}.css"
+        m.file "stylesheet.css",  "public/stylesheets/#{file_name}.css"
       end
       if options[:jquery]
+        m.file 'jquery-1.4.2.js', 'public/javascripts/jquery-1.4.2.js' unless options[:jammit]
         m.file 'application_helper.rb', 'app/helpers/application_helper.rb'# Modified application_helper.rb to be jQuery compatible
         m.file 'application.js', 'public/javascripts/application.js'# Create an application.js compatible with jQuery
+        if options[:jquery_ui]
+          m.file 'application.ui.js', 'public/javascripts/application.ui.js'
+          unless options[:jammit] 
+            m.file 'jquery-ui-1.8.2.js', 'public/javascripts/jquery-ui-1.8.2.js'
+            m.directory "public/stylesheets/ui/#{options[:jquery_ui]}/images"
+            m.file "ui_themes/#{options[:jquery_ui]}/jquery-ui-1.8.2.css", "public/stylesheets/ui/#{options[:jquery_ui]}/jquery-ui-1.8.2.css"
+            Dir[source_path("ui_themes/#{options[:jquery_ui]}/images/*.*")].each do |image|
+              m.file "ui_themes/#{options[:jquery_ui]}/images/#{File.basename(image)}", "public/stylesheets/ui/#{options[:jquery_ui]}/images/#{File.basename(image)}"
+            end
+          end
+        end
       end
       m.file "helper.rb", "app/helpers/layout_helper.rb"
     end
@@ -80,7 +92,11 @@ class NiftyLayoutGenerator < Rails::Generator::Base
       opt.on("--formtastic", "Include Formtastic stylesheet.") { |v| options[:formtastic] = v }
       opt.on("--haml", "Generate HAML for view, and SASS for stylesheet.") { |v| options[:haml] = v }
       opt.on("--jammit", "Use Jammit, an industrial strength asset packaging.") { |v| options[:jammit] = v }
-      opt.on("--jquery", "Use jQuery unobtrusive goodness.") { |v| options[:jquery] = v }
+      opt.on("--jquery", "Use jQuery, THE JavaScript library with unobtrusive goodness.") { |v| options[:jquery] = v }
+      opt.on("--jquery-ui=REQUIRED", "Use jQuery UI to add controls and widgets in your application. You must specified the default theme name.") do |v|
+        options[:jquery_ui] = v
+        options[:jquery] = true if v
+      end
       opt.on("--external-source=REQUIRED", "Set an external source path to add custom templates.") { |v| options[:external_source] = v }
     end
 

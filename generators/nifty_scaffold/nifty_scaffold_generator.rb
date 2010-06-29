@@ -281,7 +281,11 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     opt.on("--make-fixture", "Only generate fixture file for model if requested.") { |v| options[:make_fixture] = v }
     opt.on("--invert", "Generate all controller actions except these mentioned.") { |v| options[:invert] = v }
     opt.on("--declarative-authorization", "Use Declarative Authorization for authorization.") { |v| options[:declarative_authorization] = v }
-    opt.on("--jquery", "Use jQuery unobtrusive goodness.") { |v| options[:jquery] = v }
+    opt.on("--jquery", "Use jQuery, THE JavaScript library with unobtrusive goodness.") { |v| options[:jquery] = v }
+    opt.on("--jquery-ui=REQUIRED", "Use jQuery UI to add controls and widgets in your application. You must specified the default theme name.") do |v|
+      options[:jquery_ui] = v
+      options[:jquery] = true if v
+    end
     opt.on("--multilanguage", "Generate multilanguage files") { |v| options[:multilanguage] = v }
     opt.on("--haml", "Generate HAML views instead of ERB.") { |v| options[:haml] = v }
     opt.on("--hobofields", "Rich field types and migration-generator.") do |v|

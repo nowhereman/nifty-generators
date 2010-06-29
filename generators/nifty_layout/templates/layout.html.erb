@@ -7,20 +7,24 @@
       (" - #{APP_NAME}" if defined?(APP_NAME) ) +
       (" - #{COMPAGNY_NAME}" if defined?(COMPAGNY_NAME) ) %></title>
     <%- if options[:jammit] -%>
-    <%%= raw include_stylesheets(:common, :workspace, :media => 'all') %>
-    <%%= raw include_javascripts :workspace %>
-    <%%= raw yield(:js_views) %>
+      <%%= raw include_stylesheets(:common, :workspace, :media => 'all') %>
+      <%%= raw include_javascripts :workspace %>
+      <%%= raw yield(:js_views) %>
     <%- else -%>
-    <%%= stylesheet_link_tag '<%= file_name %>' %>
+      <%%= stylesheet_link_tag '<%= file_name %>' %>
       <%- if options[:formtastic] -%>
-    <%%= stylesheet_link_tag 'formtastic', 'formtastic_changes' %>
+        <%%= stylesheet_link_tag 'formtastic', 'formtastic_changes' %>
       <%- end -%>
-    <%- end -%>    
+    <%- end -%>
     <%- if options[:jquery] -%>
       <%- unless options[:jammit] -%>
-    <%%= javascript_include_tag 'jquery', 'application' %>
+        <%%= javascript_include_tag 'jquery-1.4.2', 'application' %>
+        <% if options[:jquery_ui] %>
+          <%%= stylesheet_link_tag 'ui/<%= options[:jquery_ui] %>/jquery-ui-1.8.2' %>
+          <%%= javascript_include_tag 'jquery-ui-1.8.2', 'application.ui' %>
+        <%- end -%>
       <%- end -%>
-    <%%= raw yield_authenticity_token %>
+      <%%= raw yield_authenticity_token %>
     <%- end -%>
     <%%= yield(:head) %>
   </head>

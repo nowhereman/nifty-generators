@@ -2,15 +2,19 @@
 jQuery.noConflict()(function($){
 $("div.flash").remove();
 
-var old_div = $("div#new-<%= singular_name %>, div[id^=edit-<%= singular_name %>]");
-var new_div = $("<div id='edit-<%= singular_name %>-<%%= params[:id] %>'></div>");
+$("div[id^=edit-<%= singular_name %>]").remove();
+var old_div = $("div#new-<%= singular_name %>");
+var new_div = $("<div id='edit-<%= singular_name %>-<%%= params[:id] %>' title='<%%= t('<%= singular_name %>.edit.title').titleize %>' class='edit modal dialog'></div>");
 if(old_div.length == 0) {
   $("a#get-new-<%= singular_name %>").after(new_div).hide();
 } else {
-  old_div.replaceWith(new_div);
+  old_div
+  <% if options[:jquery_ui] %>.dialog("close").dialog("widget")<% end %>
+    .after(new_div).hide();
+  $("a#get-new-article").hide();
 }
 new_div.append($("<a name='edit-<%= singular_name %>'></a>"))
-  .append($("<h2><%%=  t('<%= singular_name %>.edit.title').titleize %></h2>"))
+  .append($("<h2><%%= t('<%= singular_name %>.edit.title').titleize %></h2>"))
   .append($("<%%= escape_javascript render("form", :data_method => "put") %>"));
 window.location.hash = "#edit-<%= singular_name %>";
 $("div#edit-<%= singular_name %>-<%%= params[:id] %> > form").find("input:visible, select:visible").get(0).focus();

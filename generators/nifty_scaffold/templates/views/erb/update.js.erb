@@ -5,11 +5,14 @@ jQuery.noConflict()(function($){
 
   <%% if flash[:notice] %>
     $("#<%= plural_name %> #show-<%= singular_name %>-<%%= @<%= singular_name %>.id %>").replaceWith($("<%%= escape_javascript render(:partial => '<%= singular_name %>', :locals => { :<%= singular_name %> => @<%= singular_name %> }) %>"));
-    var new_div = $("<div id='new-<%= singular_name %>'></div>");
-    $("div#edit-<%= singular_name %>-<%%= @<%= singular_name %>.id %>").replaceWith(new_div);
+    var new_div = $("<div id='new-<%= singular_name %>' title='<%%= t('<%= singular_name %>.new.title').titleize %>' class='new modal dialog'></div>");
+    $("div#edit-<%= singular_name %>-<%%= @<%= singular_name %>.id %>")
+      <% if options[:jquery_ui] %>.dialog("close")<% end %>
+      .after(new_div)
+      .remove();
     <%% @<%= singular_name %> = <%= class_name %>.new %>
     new_div.append($("<a name='new-<%= singular_name %>'></a>"))
-      .append($("<h2><%%=  t('<%= singular_name %>.new.title').titleize %></h2>"))
+      .append($("<h2><%%= t('<%= singular_name %>.new.title').titleize %></h2>"))
       .append($("<%%= escape_javascript render("form", :data_method => "post") %>"));
     window.location.hash = "#";
   <%% elsif flash[:alert] %>
