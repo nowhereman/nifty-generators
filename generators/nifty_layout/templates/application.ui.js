@@ -8,7 +8,6 @@ jQuery.noConflict()(function($){
       maxHeight: 800,
       width: 650,
       maxWith: 800,
-      closeText: 'fermer',
       close: function(event, ui) {
         var openNewDialog = $("#content a[href][id^=get-new-" + this.id.split('-')[1] + "]:hidden");
         if(openNewDialog.length > 0)
@@ -40,12 +39,6 @@ jQuery.noConflict()(function($){
 
   $.refreshUI();
   $.ajaxSetup({
-    'error': function() {
-      $("div.flash").remove();
-      var flash_message = $("<div id='flash-alert' class='flash'>Une erreur Ajax est survenue.</div>");
-      $("div#container div#content").prepend(flash_message);
-      window.location.hash = "#";
-    },
     'success': function() {$.refreshUI();}
   });
 
