@@ -9,12 +9,12 @@
 
 <p>
 <%- if action? :edit -%>
-  <%%= link_to t('<%= singular_name %>.edit.title'), edit_<%= singular_name %>_path(@<%= singular_name %>) %> |
+  <%%= link_to t('<%= singular_name %>.edit.title'), edit_<%= singular_name %>_path(@<%= singular_name %>)<%= ", :'data-ui' => 'button'" if options[:jquery_ui] %>%> |
 <%- end -%>
 <%- if action? :destroy -%>
-  <%%= link_to t('<%= singular_name %>.destroy.title'), delete_<%= singular_name %>_path(@<%= singular_name %>) %> |
+  <%%= link_to t('<%= singular_name %>.destroy.title'), delete_<%= singular_name %>_path(@<%= singular_name %>)<%= ", :'data-ui' => 'button'" if options[:jquery_ui] %>%> |
 <%- end -%>
 <%- if action? :index -%>
-  <%%= link_to t('<%= singular_name %>.actions.list'), <%= plural_name %>_path %>
+  <%%= link_to t('<%= singular_name %>.actions.list'), <%= plural_name %>_path<%= ", :'data-ui' => 'button'" if options[:jquery_ui] %>%>
 <%- end -%>
 </p>

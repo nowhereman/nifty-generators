@@ -1,8 +1,8 @@
 jQuery.noConflict()(function($){
   $.refreshUI = function() {
-    $("#content a[href], #content button, #content input:submit, .modal.dialog a[href], .modal.dialog button, .modal.dialog input:submit").button();
+    $("#content [data-ui=button], div[data-ui=dialog] [data-ui=button]").button();
 
-    $("div.modal.dialog:visible").dialog({
+    $("div[data-ui=dialog]:visible").dialog({
       modal: true,
       minHeight: 600,
       maxHeight: 800,
@@ -12,7 +12,7 @@ jQuery.noConflict()(function($){
         var openNewDialog = $("#content a[href][id^=get-new-" + this.id.split('-')[1] + "]:hidden");
         if(openNewDialog.length > 0)
         {
-          var newDialog = $("div#new-" + openNewDialog.attr('id').split('-')[2] + ".modal.dialog:hidden");
+          var newDialog = $("div#new-" + openNewDialog.attr('id').split('-')[2] + "[data-ui=dialog]:hidden");
           if(newDialog.length > 0)
           {
             openNewDialog
@@ -38,7 +38,7 @@ jQuery.noConflict()(function($){
   };
 
   $.refreshUI();
-  $.ajaxSetup({
+  $.ajaxSetup({   
     'success': function() {$.refreshUI();}
   });
 

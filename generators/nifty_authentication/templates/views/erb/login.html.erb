@@ -1,6 +1,6 @@
 <%% title t('common.actions.login', :default => 'Log in') %>
 
-<p>Don't have an <%%= t('common.actions.account', :default => 'acount') %>? <%%= link_to t('common.actions.register', :default => 'Sign up').capitalize, signup_path %></p>
+<p>Don't have an <%%= t('common.actions.account', :default => 'acount') %>? <%%= link_to t('common.actions.register', :default => 'Sign up').capitalize, signup_path<%= ", :'data-ui' => 'button'" if options[:jquery_ui] %>%></p>
 
 <%- if options[:authlogic] -%>
 <%% form_for @<%= session_singular_name %> do |f| %>
@@ -13,7 +13,7 @@
     <%%= f.label :password, t('authlogic.attributes.<%= session_singular_name %>.password').capitalize %><br />
     <%%= f.password_field :password %>
   </p>
-  <p><%%= f.submit t('common.actions.login').capitalize %></p>
+  <p><%%= f.submit t('common.actions.login').capitalize<%= ", :'data-ui' => 'button'" if options[:jquery_ui] %>%></p>
 <%% end %>
 <%- else -%>
 <%% form_tag <%= session_plural_name %>_path do %>
@@ -25,6 +25,6 @@
     <%%= label_tag :password, t('authlogic.attributes.<%= session_singular_name %>.password').capitalize %><br />
     <%%= password_field_tag :password %>
   </p>
-  <p><%%= submit_tag t('common.actions.login').capitalize %></p>
+  <p><%%= submit_tag t('common.actions.login').capitalize<%= ", :'data-ui' => 'button'" if options[:jquery_ui] %>%></p>
 <%% end %>
 <%- end -%>

@@ -2,7 +2,7 @@
 jQuery.noConflict()(function($){
 $("div.flash").remove();
 <%% @<%= singular_name %> = <%= class_name %>.new %>
-var new_div = $("<div id='new-<%= singular_name %>' title='<%%= t('<%= singular_name %>.new.title').titleize %>' class='new modal dialog'></div>");
+var new_div = $("<div id='new-<%= singular_name %>' title='<%%= t('<%= singular_name %>.new.title').titleize %>'<%- if options[:jquery_ui] -%> data-ui='dialog'<%- end -%>></div>");
 $("a#get-new-<%= singular_name %>").after(new_div).hide();
 new_div.append($("<a name='new-<%= singular_name %>'></a>"))
   .append($("<h2><%%= t('<%= singular_name %>.new.title').titleize %></h2>"))

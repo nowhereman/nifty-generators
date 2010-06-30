@@ -1,5 +1,5 @@
 <%% title t('common.actions.register', :default => 'Sign up').capitalize %>
 
-<p>Already have an <%%= t('common.actions.account', :default => 'account') %>? <%%= link_to t('common.actions.login', :default => 'Log in').capitalize, login_path %>.</p>
+<p>Already have an <%%= t('common.actions.account', :default => 'account') %>? <%%= link_to t('common.actions.login', :default => 'Log in').capitalize, login_path<%= ", :'data-ui' => 'button'" if options[:jquery_ui] %>%>.</p>
 
 <%%= render 'form' %>

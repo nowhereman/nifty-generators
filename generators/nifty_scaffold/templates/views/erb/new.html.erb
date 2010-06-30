@@ -3,5 +3,5 @@
 <%= render_form %>
 
 <%- if action? :index -%>
-<p><%%= link_to t('<%= singular_name %>.actions.list'), <%= plural_name %>_path %></p>
+<p><%%= link_to t('<%= singular_name %>.actions.list'), <%= plural_name %>_path<%= ", :'data-ui' => 'button'" if options[:jquery_ui] %>%></p>
 <%- end -%>

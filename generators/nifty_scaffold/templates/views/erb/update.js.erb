@@ -5,7 +5,7 @@ jQuery.noConflict()(function($){
 
   <%% if flash[:notice] %>
     $("#<%= plural_name %> #show-<%= singular_name %>-<%%= @<%= singular_name %>.id %>").replaceWith($("<%%= escape_javascript render(:partial => '<%= singular_name %>', :locals => { :<%= singular_name %> => @<%= singular_name %> }) %>"));
-    var new_div = $("<div id='new-<%= singular_name %>' title='<%%= t('<%= singular_name %>.new.title').titleize %>' class='new modal dialog'></div>");
+    var new_div = $("<div id='new-<%= singular_name %>' title='<%%= t('<%= singular_name %>.new.title').titleize %>'<%- if options[:jquery_ui] -%> data-ui='dialog'<%- end -%>></div>");
     $("div#edit-<%= singular_name %>-<%%= @<%= singular_name %>.id %>")
       <% if options[:jquery_ui] %>.dialog("close")<% end %>
       .after(new_div)

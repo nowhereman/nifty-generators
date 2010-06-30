@@ -4,7 +4,7 @@ $("div.flash").remove();
 
 $("div[id^=edit-<%= singular_name %>]").remove();
 var old_div = $("div#new-<%= singular_name %>");
-var new_div = $("<div id='edit-<%= singular_name %>-<%%= params[:id] %>' title='<%%= t('<%= singular_name %>.edit.title').titleize %>' class='edit modal dialog'></div>");
+var new_div = $("<div id='edit-<%= singular_name %>-<%%= params[:id] %>' title='<%%= t('<%= singular_name %>.edit.title').titleize %>'<%- if options[:jquery_ui] -%> data-ui='dialog'<%- end -%>></div>");
 if(old_div.length == 0) {
   $("a#get-new-<%= singular_name %>").after(new_div).hide();
 } else {

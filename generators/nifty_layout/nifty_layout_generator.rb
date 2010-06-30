@@ -93,7 +93,7 @@ class NiftyLayoutGenerator < Rails::Generator::Base
       opt.on("--haml", "Generate HAML for view, and SASS for stylesheet.") { |v| options[:haml] = v }
       opt.on("--jammit", "Use Jammit, an industrial strength asset packaging.") { |v| options[:jammit] = v }
       opt.on("--jquery", "Use jQuery, THE JavaScript library with unobtrusive goodness.") { |v| options[:jquery] = v }
-      opt.on("--jquery-ui=REQUIRED", "Use jQuery UI to add controls and widgets in your application. You must specified the default theme name.") do |v|
+      opt.on("--jquery-ui=REQUIRED", "Use jQuery UI to add controls and widgets in your application. You must specified the a theme name (e.g. 'default').") do |v|
         options[:jquery_ui] = v
         options[:jquery] = true if v
       end

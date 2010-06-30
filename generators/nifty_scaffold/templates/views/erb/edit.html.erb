@@ -5,10 +5,10 @@
 <%- if actions? :show, :index -%>
 <p>
 <%- if action? :show -%>
-  <%%= link_to t('common.actions.show'), @<%= singular_name %> %> |
+  <%%= link_to t('common.actions.show'), @<%= singular_name %><%= ", :'data-ui' => 'button'" if options[:jquery_ui] %>%> |
 <%- end -%>
 <%- if action? :index -%>
-  <%%= link_to t('<%= singular_name %>.actions.list'), <%= plural_name %>_path %>
+  <%%= link_to t('<%= singular_name %>.actions.list'), <%= plural_name %>_path<%= ", :'data-ui' => 'button'" if options[:jquery_ui] %>%>
 <%- end -%>
 </p>
 <%- end -%>

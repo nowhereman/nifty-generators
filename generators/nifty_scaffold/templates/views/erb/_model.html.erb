@@ -3,12 +3,12 @@
     <td><%%=h <%= singular_name %>.<%= attribute.name %> %></td>
   <%- end -%>
   <%- if action? :show -%>
-    <td><%%= link_to t('common.actions.show'), <%= singular_name %> %></td>
+    <td><%%= link_to t('common.actions.show'), <%= singular_name %><%= ", :'data-ui' => 'button'" if options[:jquery_ui] %>%></td>
   <%- end -%>
   <%- if action? :edit -%>
-    <td><%%= link_to t('common.actions.edit'), edit_<%= singular_name %>_path(<%= singular_name %>)<%=  ", :'data-remote' => true, :'data-method' => 'get'" if options[:jquery] %> %></td>
+    <td><%%= link_to t('common.actions.edit'), edit_<%= singular_name %>_path(<%= singular_name %>)<%=  ", :'data-remote' => true, :'data-method' => 'get'" if options[:jquery] %><%= ", :'data-ui' => 'button'" if options[:jquery_ui] %>%></td>
   <%- end -%>
   <%- if action? :destroy -%>
-    <td><%%= link_to t('common.actions.destroy'), delete_<%= singular_name %>_path(<%= singular_name %>)<%=  ", :'data-remote' => true, :'data-method' => 'delete', :'data-confirm' => t('common.labels.are_you_sure')" if options[:jquery] %> %></td>
+    <td><%%= link_to t('common.actions.destroy'), delete_<%= singular_name %>_path(<%= singular_name %>)<%=  ", :'data-remote' => true, :'data-method' => 'delete', :'data-confirm' => t('common.labels.are_you_sure')" if options[:jquery] %><%= ", :'data-ui' => 'button'" if options[:jquery_ui] %>%></td>
   <%- end -%>
 </tr>

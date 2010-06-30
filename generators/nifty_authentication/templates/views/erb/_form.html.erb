@@ -28,5 +28,5 @@
   <%% end %>
   <%- end -%>
   <%% action = (params[:action] == 'new') ? 'signup' : params[:action] %>
-  <p><%%= f.submit t("common.actions.#{action}", :default => 'Sign up') %></p>
+  <p><%%= f.submit t("common.actions.#{action}", :default => 'Sign up')<%= ", :'data-ui' => 'button'" if options[:jquery_ui] %>%></p>
 <%% end %>

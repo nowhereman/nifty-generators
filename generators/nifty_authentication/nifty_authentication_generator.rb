@@ -159,6 +159,11 @@ protected
     opt.on("--haml", "Generate HAML views instead of ERB.") { options[:haml] = true }
     opt.on("--authlogic", "Use Authlogic for authentication.") { options[:authlogic] = true }
     opt.on("--declarative-authorization", "Use Declarative Authorization for authorization.") { options[:declarative_authorization] = true }
+    opt.on("--jquery", "Use jQuery, THE JavaScript library with unobtrusive goodness.") { |v| options[:jquery] = v }
+    opt.on("--jquery-ui", "Use jQuery UI to add controls and widgets in your application.") do |v|
+      options[:jquery_ui] = v
+      options[:jquery] = v if v
+    end
   end
 
   def banner

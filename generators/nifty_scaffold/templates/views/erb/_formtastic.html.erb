@@ -6,6 +6,6 @@
 <%- end -%>
   <%% end %>
   <%% form.buttons do %>
-    <%%= form.commit_button %>
+    <%%= form.commit_button<%- if options[:jquery_ui] -%> :button_html => { :'data-ui' => 'button' }<%- end -%>%>
   <%% end %>
 <%% end %>
