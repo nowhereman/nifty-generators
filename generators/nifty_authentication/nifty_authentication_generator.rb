@@ -56,16 +56,28 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
         m.insert_into "app/controllers/#{application_controller_name}.rb", <<-CODE
 before_filter { |c| Authorization.current_user = c.current_user }
 
-def method_missing(symbol, *args)
-  raise ActionController::RoutingError, "You must defined 'map.root' route in 'config/routes.rb'" if symbol == :root_url
-  super symbol, *args
-end
+  def method_missing(symbol, *args)
+    raise ActionController::RoutingError, "You must defined 'map.root' route in 'config/routes.rb'" if symbol == :root_url
+    super symbol, *args
+  end
 
   protected
 
-    def permission_denied
-      flash[:alert] = I18n.t('common.errors.access_denied', :default => 'Sorry, you are not allowed to access that page.')
-      redirect_to root_url
+    def permission_denied(message=nil)
+      flash[:alert] = message || I18n.t('common.errors.access_denied', :default => 'Sorry, you are not allowed to access that page.')
+      begin
+        # loop check
+        if session[:last_back] != request.env['HTTP_REFERER']
+          redirect_to :back, :status => (request.xhr?) ? 401 : 301 # Not Authorised
+          session[:last_back] = request.env['HTTP_REFERER'] unless request.xhr?
+        else
+          # raise on error
+          raise ActionController::RedirectBackError
+        end
+      rescue ActionController::RedirectBackError
+        # fallback on loop or other :back error
+        redirect_to root_url, :status => (request.xhr?) ? 401 : 301 # Not Authorised
+      end
     end
 
   public
@@ -135,7 +147,8 @@ CODE
   def after_generate
     if options[:declarative_authorization]
       `rake db:migrate`
-      Role.create(:name => "admin")
+      # TODO Move the creation of roles in db/seeds.rb
+      Role.create(:name => "admin") # 'admin' MUST be the first created role
       Role.create(:name => "user")
     end
   end

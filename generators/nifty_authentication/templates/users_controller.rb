@@ -26,8 +26,7 @@ class <%= user_plural_class_name %>Controller < ApplicationController
       end
     <%- if options[:declarative_authorization] -%>
     rescue Authorization::AttributeAuthorizationError => e
-      flash[:alert] = I18n.t('common.errors.access_denied', :default => 'Sorry, you are not allowed to assign roles.')
-      redirect_to root_url
+      permission_denied( I18n.t('common.errors.access_denied', :default => 'Sorry, you are not allowed to assign roles.') )
     end
     <%- end -%>
   end
@@ -40,12 +39,19 @@ class <%= user_plural_class_name %>Controller < ApplicationController
     @<%= user_singular_name %> = current_user
     <%- if options[:declarative_authorization] -%>
     params[:<%= user_singular_name %>][:role_ids] = [ Role.find_by_name('user').id ] unless params[:<%= user_singular_name %>][:role_ids] # default role is 'user'
+    begin
     <%- end -%>
-    if <%= user_singular_name %>.update_attributes(params[:<%= user_singular_name %>])
-      flash[:notice] = I18n.t('flash.actions.update.alert', :default => 'Successfully updated profile.')
-      redirect_to root_url
-    else
-      render :action => 'edit'
+      if @<%= user_singular_name %>.update_attributes(params[:<%= user_singular_name %>])
+        flash[:notice] = I18n.t('authlogic.actions.update_account.notice', :default => 'Your account is successfully updated.')
+        redirect_to root_url
+      else
+        flash[:alert] = I18n.t('authlogic.actions.update_account.alert', :default => 'Your account could not be updated.')
+        render :action => 'edit'
+      end
+    <%- if options[:declarative_authorization] -%>
+    rescue Authorization::AttributeAuthorizationError => e
+      permission_denied( I18n.t('common.errors.access_denied', :default => 'Sorry, you are not allowed to assign roles.') )
     end
+    <%- end -%>
   end
 end
