@@ -6,7 +6,7 @@ class Create<%= user_plural_class_name %> < ActiveRecord::Migration
     <%- if options[:authlogic] -%>
       t.string :persistence_token
       t.string :crypted_password
-      t.string :perishable_token, :null => false # optional, see Authlogic::Session::Perishability
+      t.string :perishable_token, :null => false, :default => "" # optional, see Authlogic::Session::Perishability
       t.integer :login_count, :null => false, :default => 0 # optional, see Authlogic::Session::MagicColumns
       t.integer :failed_login_count, :null => false, :default => 0 # optional, see Authlogic::Session::MagicColumns
       t.datetime :last_request_at # optional, see Authlogic::Session::MagicColumns

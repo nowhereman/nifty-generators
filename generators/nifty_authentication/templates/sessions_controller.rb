@@ -17,7 +17,7 @@ class <%= session_plural_class_name %>Controller < ApplicationController
   
   def destroy
     @<%= session_singular_name %> = <%= session_class_name %>.find
-    @<%= session_singular_name %>.destroy
+    @<%= session_singular_name %>.destroy  if @<%= session_singular_name %>
     flash[:notice] = I18n.t('authlogic.actions.logout.notice', :default => 'You have been logged out.')
     redirect_to root_url
   end

@@ -4,11 +4,26 @@ class <%= user_class_name %> < ActiveRecord::Base
   <%- if options[:declarative_authorization] -%>
   has_many :assignments
   has_many :roles, :through => :assignments
-
+  
   def role_symbols
     roles.map do |role|
       role.name.underscore.to_sym
     end
+  end
+
+  # Since UserSession.find and UserSession.save will trigger
+  # record.save_without_session_maintenance(false) and the 'updated_at', 'last_request_at'
+  # fields of user model will be updated every time by authlogic if record (user) found.
+  # We need to reset Authorization.current_user instead of giving the update privilege
+  # of user model to guest role, and use before_save filter in user model instead of
+  # after_find and before_save filters in UserSession model in case of other methods like
+  # reset_perishable_token! will call save_without_session_maintenance too.
+  before_save :set_current_user_for_model_security
+  
+  protected
+
+  def set_current_user_for_model_security
+    ::Authorization.current_user = self if valid?
   end
   <%- end -%>
 <%- else -%>
