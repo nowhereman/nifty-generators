@@ -61,6 +61,6 @@ en:
         <%= a.name %>: "Hint for <%= a.name.humanize %>"
         <%- end -%>
     actions:
-      create: "Create my {{model}}"
+      create: "Create my %{model}"
       update: "Save changes"
       dummie: "Launch!"

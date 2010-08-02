@@ -74,7 +74,8 @@ fr:
       cant_close_window: "La fenêtre ne peut pas se fermer automatiquement?"
       login_required: Vous devez vous identifier pour effectuer cette action.
       no_data: Aucune donnée n'a été trouvée...
-      no_javascript: Le Javascript est obligatoire
+      no_javascript: Le Javascript est obligatoire.
+      ajax_error: Une erreur Ajax est survenue.
 
     in_place_edit:
       cancel: Annuler

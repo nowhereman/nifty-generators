@@ -58,6 +58,6 @@ fr:
         <%= a.name %>: "Astuce pour <%= a.name.humanize %>"
         <%- end -%>
     actions:
-      create: "Ajouter un(e) {{model}}"
+      create: "Ajouter un(e) %{model}"
       update: "Enregistrer les changements"
       dummie: "Démarrer!"

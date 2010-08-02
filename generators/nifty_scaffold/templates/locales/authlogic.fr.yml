@@ -19,6 +19,9 @@ fr:
       logout:
         notice: Vous êtes maintenant déconnecté.
         alert: La déconnexion a échoué.
+      update_account:
+        notice: Votre compte a été modifié(e).
+        alert: Votre compte n'a pas pu être été modifié(e).
     models:
       user_session: "session de l'utilisateur"
     attributes:
@@ -33,9 +36,12 @@ fr:
     models:
       user: Utilisateur
       user_session: "session de l'utilisateur"
+      role: Rôle
     attributes:
       user:
         username: nom d'utilisateur
         email: email
         password: mot de passe
         password_confirmation: confirmer le mot de passe
+      role:
+        name: nom

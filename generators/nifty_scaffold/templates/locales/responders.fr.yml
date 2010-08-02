@@ -2,11 +2,11 @@ fr:
   flash:
     actions:
       create:
-        notice: "{{resource_name}} a été créé(e)."
-        alert: "{{resource_name}} n'a pas pu être créé(e)"
+        notice: "%{resource_name} a été créé(e)."
+        alert: "%{resource_name} n'a pas pu être créé(e)"
       update:
-        notice: "{{resource_name}} a été modifié(e)."
-        alert: "{{resource_name}} n'a pas pu être modifié(e)"
+        notice: "%{resource_name} a été modifié(e)."
+        alert: "%{resource_name} n'a pas pu être modifié(e)"
       destroy:
-        notice: "{{resource_name}} a été supprimé(e)."
-        alert: "{{resource_name}} n'a pas pu être supprimé(e)"
+        notice: "%{resource_name} a été supprimé(e)."
+        alert: "%{resource_name} n'a pas pu être supprimé(e)"

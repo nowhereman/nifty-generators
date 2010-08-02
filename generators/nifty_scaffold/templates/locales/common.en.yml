@@ -75,7 +75,8 @@ en:
       cant_close_window: "Couldn't the window be closed automatically?"
       login_required: You have to authenticate for this action.
       no_data: No matching data found...
-      no_javascript: Javascript needed
+      no_javascript: Javascript needed.
+      ajax_error: An Ajax error has occurred.
 
     in_place_edit:
       cancel: Cancel

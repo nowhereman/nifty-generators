@@ -20,6 +20,9 @@ en:
       logout:
         notice: You have been logged out.
         alert: Logout failed.
+      update_account:
+        notice: Your account is successfully updated.
+        alert: Your account could not be updated.
     models:
       user_session: user session
     attributes:
@@ -34,8 +37,11 @@ en:
     models:
       user: user
       user_session: user session
+      role: role
     attributes:
       user:
         username: username
         email: email
         password: password
+      role:
+        name: name
