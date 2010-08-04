@@ -297,7 +297,8 @@ class NiftyScaffoldGenerator < Rails::Generator::Base
     opt.on("--formtastic", "Generate formtastic forms.") { |v| options[:formtastic] = v }
     opt.on("--testunit", "Use test/unit for test files.") { options[:test_framework] = :testunit }
     opt.on("--rspec", "Use RSpec for test files.") { options[:test_framework] = :rspec }
-    opt.on("--rspecmocks", "Use RSpec for test files.") { options[:rspec_mock_with] = :rspec }
+    opt.on("--rspecmocks", "Use RSpec Mock Objects for test files.") { options[:rspec_mock_with] = :rspec }
+    opt.on("--machinist", "Use Machinist Test Data Builders for ActiveRecord Objects.") { |v| options[:machinist] = v }
     opt.on("--shoulda", "Use Shoulda for test files.") { options[:test_framework] = :shoulda }
   end
 
