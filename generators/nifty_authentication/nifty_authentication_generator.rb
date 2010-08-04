@@ -45,6 +45,7 @@ class NiftyAuthenticationGenerator < Rails::Generator::Base
       m.insert_into "app/controllers/#{application_controller_name}.rb", 'include Authentication'
 
       if options[:declarative_authorization]
+        m.template "authorization_rules.rb", "config/authorization_rules.rb"
         m.template "assignment.rb", "app/models/assignment.rb"
         m.template "role.rb", "app/models/role.rb"
 
@@ -91,10 +92,16 @@ CODE
         m.directory "spec/fixtures"
         m.directory "spec/controllers"
         m.directory "spec/models"
+        m.directory "spec/support"
         m.template "fixtures.yml", "spec/fixtures/#{user_plural_name}.yml"
         m.template "tests/rspec/user.rb", "spec/models/#{user_singular_name}_spec.rb"
         m.template "tests/rspec/users_controller.rb", "spec/controllers/#{user_plural_name}_controller_spec.rb"
         m.template "tests/rspec/sessions_controller.rb", "spec/controllers/#{session_plural_name}_controller_spec.rb"
+        if options[:machinist] && options[:declarative_authorization] && options[:authlogic]
+          m.template "tests/rspec/session_example_helpers.rb", "spec/support/session_example_helpers.rb"
+          m.template "tests/blueprints.rb", "spec/support/blueprints.rb"
+        end
+
       else
         m.directory "test"
         m.directory "test/fixtures"
@@ -104,6 +111,7 @@ CODE
         m.template "tests/#{test_framework}/user.rb", "test/unit/#{user_singular_name}_test.rb"
         m.template "tests/#{test_framework}/users_controller.rb", "test/functional/#{user_plural_name}_controller_test.rb"
         m.template "tests/#{test_framework}/sessions_controller.rb", "test/functional/#{session_plural_name}_controller_test.rb"
+        m.template "tests/blueprints.rb", "test/blueprints.rb" if options[:machinist] && options[:declarative_authorization] && options[:authlogic]
       end
     end
   end
@@ -169,6 +177,7 @@ protected
     opt.on("--testunit", "Use test/unit for test files.") { options[:test_framework] = :testunit }
     opt.on("--rspec", "Use RSpec for test files.") { options[:test_framework] = :rspec }
     opt.on("--shoulda", "Use Shoulda for test files.") { options[:test_framework] = :shoulda }
+    opt.on("--machinist", "Use Machinist Test Data Builders for ActiveRecord Objects.") { |v| options[:machinist] = v }
     opt.on("--haml", "Generate HAML views instead of ERB.") { options[:haml] = true }
     opt.on("--authlogic", "Use Authlogic for authentication.") { options[:authlogic] = true }
     opt.on("--declarative-authorization", "Use Declarative Authorization for authorization.") { options[:declarative_authorization] = true }
