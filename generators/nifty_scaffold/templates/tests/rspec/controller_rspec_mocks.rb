@@ -26,7 +26,7 @@ describe <%= plural_class_name %>Controller do
       <%= class_name %>.stub!(:all).and_return(@<%= plural_name %>)
   <%- else -%>
     @<%= singular_name %> = <%= class_name %>.make
-    @<%= plural_name %> = [@<%= singular_name %>]
+    @<%= plural_name %> = [ @<%= singular_name %> ]
     <%= class_name %>.stub!(:new).and_return(@<%= singular_name %>)
     <%= class_name %>.stub!(:find).and_return(@<%= singular_name %>)
     <%= class_name %>.stub!(:all).and_return([@<%= singular_name %>])
