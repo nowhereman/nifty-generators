@@ -29,9 +29,9 @@ class NiftyLayoutGenerator < Rails::Generator::Base
         if options[:jquery_ui]
           m.file 'application.ui.js', 'public/javascripts/application.ui.js'
           unless options[:jammit] 
-            m.file 'jquery-ui-1.8.2.js', 'public/javascripts/jquery-ui-1.8.2.js'
+            m.file 'jquery-ui-1.8.4.js', 'public/javascripts/jquery-ui-1.8.4.js'
             m.directory "public/stylesheets/ui/#{options[:jquery_ui]}/images"
-            m.file "ui_themes/#{options[:jquery_ui]}/jquery-ui-1.8.2.css", "public/stylesheets/ui/#{options[:jquery_ui]}/jquery-ui-1.8.2.css"
+            m.file "ui_themes/#{options[:jquery_ui]}/jquery-ui-1.8.4.css", "public/stylesheets/ui/#{options[:jquery_ui]}/jquery-ui-1.8.4.css"
             Dir[source_path("ui_themes/#{options[:jquery_ui]}/images/*.*")].each do |image|
               m.file "ui_themes/#{options[:jquery_ui]}/images/#{File.basename(image)}", "public/stylesheets/ui/#{options[:jquery_ui]}/images/#{File.basename(image)}"
             end
